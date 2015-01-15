@@ -48,15 +48,12 @@ public class ShowHistoryShoppinglist extends AbstractShoppinglistActivity {
 		// get the values from calling activity
 		this.clickedShoppinglistId = this.getIntent().getIntExtra(DBConstants.COL_SHOPPINGLIST_ID,
 				-1);
-		final String clickedShoppinglistCreatedTime = this.getIntent().getStringExtra(
-				DBConstants.COL_SHOPPINGLIST_CREATED_TIME);
 		final String clickedShoppinglistFinishedTime = this.getIntent().getStringExtra(
 				DBConstants.COL_SHOPPINGLIST_FINISHED_TIME);
 
 		// update title TextView with clickedShoppinglist dates
 		this.textViewTitle = (TextView) this.findViewById(R.id.titleHistoryShoppinglist);
-		this.textViewTitle.setText(clickedShoppinglistCreatedTime + " bis "
-				+ clickedShoppinglistFinishedTime);
+		this.textViewTitle.setText(clickedShoppinglistFinishedTime);
 
 		this.historyList = this.datasource.getHistoryByShoppinglistId(this.clickedShoppinglistId);
 
@@ -88,8 +85,8 @@ public class ShowHistoryShoppinglist extends AbstractShoppinglistActivity {
 		// AddProductbutton - Actionbar
 		case R.id.actionbarDeleteHistory:
 			final AlertDialog.Builder alertBox = new AlertDialog.Builder(this);
-			alertBox.setMessage("Sind Sie sich sicher, den komplette Verlauf unwiderruflich zu l�schen?");
-			alertBox.setPositiveButton("Ja", new OnClickListener() {
+			alertBox.setMessage("you really want to delete the history?");
+			alertBox.setPositiveButton("Yes", new OnClickListener() {
 
 				public void onClick(final DialogInterface dialog, final int which) {
 					ShowHistoryShoppinglist.this.datasource.deleteHistory();
@@ -98,7 +95,7 @@ public class ShowHistoryShoppinglist extends AbstractShoppinglistActivity {
 				}
 			});
 
-			alertBox.setNegativeButton("Nein", new OnClickListener() {
+			alertBox.setNegativeButton("No", new OnClickListener() {
 
 				public void onClick(final DialogInterface dialog, final int which) {
 					// do nothing here

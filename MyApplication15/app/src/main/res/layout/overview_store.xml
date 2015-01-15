@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Layout.Vertical.Table"
+    android:scrollbarAlwaysDrawVerticalTrack="true" >
+
+    <TableRow>
+
+        <ListView
+            android:id="@+id/listViewStore"
+            style="@style/View.List.Clickable.Long" >
+        </ListView>
+    </TableRow>
+
+    <TableRow android:gravity="center" >
+
+        <Button
+            android:id="@+id/buttonAddToHistoryStoreOverview"
+            style="@style/View.Button.Gone"
+            android:text="@string/button_add_to_history" >
+        </Button>
+        <Button
+            android:id="@+id/buttonSubmitList"
+            style="@style/View.Button.Gone"
+            android:text="@string/button_submit_to_server" >
+        </Button>
+    </TableRow>
+
+</TableLayout>

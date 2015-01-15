@@ -64,6 +64,127 @@
         <activity android:label="@string/title_activity_prepare_indoor_map" android:name=".PrepareIndoorActivity" android:screenOrientation="landscape"  > </activity>
         <activity android:label="@string/title_activity_details_list" android:name="com.kawtar.finalresponse.DetailsFinalListActivity" android:screenOrientation="landscape" > </activity>
         <activity android:label="@string/title_activity_voice_recognition_list" android:name="com.kawtar.listshopping.VoiceRecognitionFillListActivity" android:screenOrientation="landscape" > </activity>
+
+        <!-- WIDGET PART -->
+        <receiver android:name="com.shopping.list.widget.ShoppinglistWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.shopping.list.widget.ShoppinglistWidgetProvider.ACTION_WIDGET_UPDATE_DATA" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+        <receiver android:name="com.shopping.list.widget.ShoppinglistWidgetBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="com.shopping.list.widget.CLICK_ROW" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.shopping.list.widget.ShoppinglistWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <!-- OTHER ACTIVITIES -->
+        <activity
+            android:name="com.shopping.list.StoreProductsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.ShoppinglistActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.AddProductActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.UserConfigurationActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="localhost"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.shopping.list.EditProductActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.ManageStoresActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.ManageUnitsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.ManageFavoritesActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.EditFavoriteActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.AddFavoriteActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.EditFavoriteProductListActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.EditFavoriteProductMappingActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.AddProductToFavoriteActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.AddStoreActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.AddUnitActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.EditStoreActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.EditUnitActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.ShowHistoryOverviewActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.shopping.list.ShowHistoryShoppinglist"
+            android:label="@string/app_name" >
+        </activity>
+
     </application>
 
 </manifest>

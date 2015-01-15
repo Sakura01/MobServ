@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.example.kawtar.myapplication.R;
 import com.kawtar.gpstracker.GPSTracker;
-import com.kawtar.listshopping.AddNewItemActivity;
 import com.kawtar.mainUI.controls.SeekbarWithIntervals;
+import com.shopping.list.ShoppinglistActivity;
 
 
 import android.content.Context;
@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
 								setUserLatitude(gps.getLatitude());
 								setUserLongitude(gps.getLongitude());
 
-								mIntent = new Intent(MainActivity.this, AddNewItemActivity.class);
+								mIntent = new Intent(MainActivity.this, ShoppinglistActivity.class);
 								startActivity(mIntent);
 							}
 							else

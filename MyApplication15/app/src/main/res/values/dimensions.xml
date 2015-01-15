@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="seekbar_thumb_width">25dp</dimen>
+    <dimen name="dimBtnW">100dp</dimen>
+    <dimen name="dimBtnH">50dp</dimen>
+    <dimen name="dimBtnPW">40dp</dimen>
+    <dimen name="dimBtnPH">50dp</dimen>
+    <dimen name="txtSize">20dp</dimen>
+    <dimen name="TextViewW">100dp</dimen>
+    <dimen name="TextViewH">30dp</dimen>
+</resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ShopSmarter</string>
+    <string name="title_activity_maps">OutdoorMapActivity</string>
+    <string name="showGPS">Show My Location</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
+    <string name="title_indoor_map_activity">IndoorMapActivity</string>
+    <string name="map_heading">Indoor Map</string>
+    <string name="list_heading">Shopping List</string>
+    <string name="name">name</string>
+    <string name="accept">Accept</string>
+    <string name="brand">brand</string>
+    <string name="color">color</string>
+    <string name="quantity">1</string>
+    <string name="add">Add item</string>
+    <string name="submit">Submit</string>
+    <string name="distRange">Distance Range (km):</string>
+    <string name="budget">Budget(€):</string>
+    <string name="cancel">Cancel</string>
+    <string name="get">Get</string>
+    <string name="title_activity_main">Main Activity</string>
+    <string name="title_activity_request">Request Activity</string>
+    <string name="title_activity_shoppinglist">To shop Activity</string>
+    <string name="title_activity_finalresponse">Final Response Activity</string>
+    <string name="status">status</string>
+    <string name="details">Details</string>
+    <string name="title_activity_outdoor_map">Outdoor Map Activity</string>
+    <string name="title_activity_details_list">Details Activity</string>
+    <string name="title_activity_indoor_map">Indoor Map Activity</string>
+    <string name="title_activity_prepare_indoor_map">Loading Indoor Map Activity</string>
+    <string name="title_activity_voice_recognition_list">Voice Recognition Fill List Activity</string>
+    <string name="back">Back</string>
+    <string name="hello">Hello</string>
+    <string name="voice">Try again</string>
+</resources>

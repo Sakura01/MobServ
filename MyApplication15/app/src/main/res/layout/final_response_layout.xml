@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+    
+    <TextView
+        android:id="@+id/SuperMarket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/brown"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="italic"
+        android:textSize="20dp"
+        android:typeface="sans"
+        />
+     <TextView
+        android:id="@+id/Total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SuperMarket"
+         android:textColor="@color/brown"
+         android:textAppearance="?android:attr/textAppearanceMedium"
+         android:textStyle="italic"
+         android:textSize="20dp"
+         android:typeface="sans"
+         />
+ <TextView
+        android:id="@+id/Distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Total"
+        android:textColor="@color/brown"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="italic"
+        android:textSize="20dp"
+        android:typeface="sans"
+     />
+      <Button
+          android:id="@+id/ShowDetails"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_below="@+id/Distance"
+          android:text="@string/details" />
+
+      <Button
+          android:id="@+id/AcceptOffer"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBaseline="@+id/ShowDetails"
+          android:layout_alignBottom="@+id/ShowDetails"
+          android:layout_alignParentRight="true"
+          android:text="@string/accept" />
+        <View
+        android:id="@+id/separator"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="@color/grege"
+        android:layout_below="@+id/AcceptOffer"
+        android:layout_marginTop="2dp"
+        />
+
+</RelativeLayout>

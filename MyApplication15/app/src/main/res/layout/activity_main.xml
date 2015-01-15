@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    tools:context=".MainActivity" >
+    <TextView
+            android:id="@+id/textDistanceRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/distRange"
+            android:textColor="@color/brown"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="italic"
+            android:textSize="20dp"
+            android:typeface="sans"  />
+	<include
+		    android:id="@+id/include01"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/textDistanceRange"
+		    android:layout_centerHorizontal="true"
+		    layout="@layout/seekbar_layout" />
+
+
+        <TextView
+            android:id="@+id/textBudget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:layout_below="@+id/include01"
+            android:layout_alignStart="@+id/include01"
+            android:text="@string/budget"
+            android:textColor="@color/brown"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="italic"
+            android:textSize="20dp"
+            android:typeface="sans"  />
+
+          <EditText
+              android:id="@+id/EditBudget"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/textBudget"
+              android:layout_marginTop="15dp"
+              android:ems="10"
+              android:inputType="text"
+              android:textSize="@dimen/txtSize"
+              android:padding="5dp"
+              android:textColor="@color/brown"
+              android:background="@xml/custom_edit_text"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:textStyle="italic"
+              android:typeface="sans" />
+
+          <ImageButton
+          android:id="@+id/buttonSubmit"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_alignParentBottom="true"
+          android:layout_below="@+id/EditBudget"
+          android:src="@drawable/send" />
+
+</RelativeLayout>

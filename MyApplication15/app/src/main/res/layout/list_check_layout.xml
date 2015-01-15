@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/foreground">
+    <ListView
+        android:id="@+id/ItemsListReceived"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/response_layout"
+        android:layout_marginTop="28dp"
+        android:layout_alignParentTop="true" />
+
+    <ImageButton
+        android:id="@+id/buttonSubmitList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/send" />
+    
+    <ImageButton
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/back" />
+    
+
+
+
+
+</RelativeLayout>

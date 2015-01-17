@@ -7,23 +7,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.kawtar.listshopping.Product;
+import com.kawtar.listshopping.ProductToSend;
 
 
 public class RequestList {
-	private List<Product> mList;   
+	private List<ProductToSend> mList;
     private int mDistanceRange;     
     private int mBudget; 
     private static boolean mAccept;
     private double mLatitude;
     private double mLongitude;
-    public RequestList(List<Product> list,int distanceRange, int budget,double latitude,double longitude,boolean accept)  
+    public RequestList(List<ProductToSend> list,int distanceRange, int budget,double latitude,double longitude)
     {         
-    	mList=new ArrayList<Product>();
+    	mList=new ArrayList<ProductToSend>();
     	mList=list;
     	mDistanceRange = distanceRange; 
     	mBudget = budget;
-    	mAccept=accept;
     	mLatitude=latitude;
     	mLongitude=longitude;
     }
@@ -35,11 +34,11 @@ public class RequestList {
     {
     	return mLongitude;
     }
-    public void setList(Product product)
+    public void setList(ProductToSend product)
     {
     	mList.add(product);
     }
-    public List<Product> getList()
+    public List<ProductToSend> getList()
     {
     	return mList;
     }
@@ -50,11 +49,6 @@ public class RequestList {
     public int getDistanceRange()
     {
     	return mDistanceRange;
-    }
-    public boolean getAcceptFlag()
-    {
-    	
-    	return mAccept;
     }
     public String toJSON(){
 

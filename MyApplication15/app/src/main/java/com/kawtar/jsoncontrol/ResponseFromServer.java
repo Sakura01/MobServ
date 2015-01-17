@@ -1,32 +1,27 @@
 package com.kawtar.jsoncontrol;
 
-import android.util.JsonReader;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.kawtar.listshopping.Product;
+import com.kawtar.listshopping.ProductToSend;
 
 public class ResponseFromServer 
 {
 	private SuperMarket mSuperMarket;
 	private float mTotal;
-	private static List<Product> listSh;
+	private static List<ProductToSend> listSh;
 	private float mDistance;
     private static String toParse;
     private static List<ResponseFromServer> offers;
     private static ResponseFromServer responseOffers;
     private static SuperMarket superMarket;
-    private static List<Product>lip;
-	public ResponseFromServer(List<Product> list,SuperMarket supermarket,float total,float distance )
+    private static List<ProductToSend>lip;
+	public ResponseFromServer(List<ProductToSend> list,SuperMarket supermarket,float total,float distance )
 	{         
-			listSh=new ArrayList<Product>();
+			listSh=new ArrayList<ProductToSend>();
 			listSh=list;
 	    	mTotal=total;
 	    	mDistance=distance;
@@ -50,11 +45,11 @@ public class ResponseFromServer
 	{
 		return mTotal;
 	}
-	public  List<Product> getList()
+	public  List<ProductToSend> getList()
 	{
     	return listSh;
 	}
-	public void setList(List<Product> list)
+	public void setList(List<ProductToSend> list)
 	{
 		listSh=list;
 	}
@@ -103,13 +98,13 @@ public class ResponseFromServer
         long tmp = Math.round(value);
         return (float) tmp / factor;
     }
-    public static List<Product> getParsing(JSONArray listShopping)
+    public static List<ProductToSend> getParsing(JSONArray listShopping)
     {
-        List <Product>lit=new ArrayList<Product>();
+        List <ProductToSend>lit=new ArrayList<ProductToSend>();
         try {
             for(int j=0;j<listShopping.length();j++)
             {
-                Product p;
+                ProductToSend p;
                 JSONObject jb2 = listShopping.getJSONObject(j);
                 String name = jb2.getString("name");
                 String brand = jb2.getString("brand");
@@ -127,14 +122,14 @@ public class ResponseFromServer
                     {
 
                         String status=q+"max available";
-                        p=new Product(name,Integer.parseInt(initQuantity),Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),false);
+                        p=new ProductToSend(name,Integer.parseInt(initQuantity),Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
 
 
                     }
                     else
                     {
                         String status="Ok";
-                        p=new Product(name,Integer.parseInt(initQuantity), Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),false);
+                        p=new ProductToSend(name,Integer.parseInt(initQuantity), Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
 
                     }
 
@@ -142,7 +137,7 @@ public class ResponseFromServer
                 else
                 {
                     String status="Missing";
-                    p=new Product(name,0, Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),false);
+                    p=new ProductToSend(name,0, Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
 
                 }
                 lit.add(p);
@@ -152,11 +147,11 @@ public class ResponseFromServer
         }
         return lit;
     }
-    public static List<Product> parseJSONResultFalse(String result)
+    public static List<ProductToSend> parseJSONResultFalse(String result)
 	{
 		try
 	    {
-		  List<Product> list=new ArrayList<Product>();
+		  List<ProductToSend> list=new ArrayList<ProductToSend>();
 		  JSONArray jarray=new JSONArray(result);
 	      for(int i=0;i<jarray.length();i++)
 	      {
@@ -168,24 +163,24 @@ public class ResponseFromServer
 			         String quantity = jbo.getString("quantity");
 			         String initQuantity=jbo.getString("init_quantity");
 			         String acceptProduct=jbo.getString("accept_product");
-                     Product p;
+                     ProductToSend p;
                      int q=Integer.parseInt(quantity);
                      if(q!=-1){
                         if(Integer.parseInt(initQuantity)>q )
                         {
                             String status=q+"max available";
-                            p=new Product(name,Integer.parseInt(initQuantity), 0,0, 0,false);
+                            p=new ProductToSend(name,Integer.parseInt(initQuantity), 0,0, 0,false);
                         }
                         else
                         {
                             String status="Ok";
-                            p=new Product(name,Integer.parseInt(initQuantity), 0,0, 0,false);
+                            p=new ProductToSend(name,Integer.parseInt(initQuantity), 0,0, 0,false);
                         }
                     }
                     else
                     {
                         String status="Missing";
-                        p=new Product(name,0, 0,0, 0,false);
+                        p=new ProductToSend(name,0, 0,0, 0,false);
 
                     }
                     list.add(p);

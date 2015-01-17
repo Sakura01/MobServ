@@ -6,13 +6,12 @@ import java.util.List;
 import com.example.kawtar.myapplication.OutdoorMapActivity;
 import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.ResponseFromServer;
-import com.kawtar.listshopping.Product;
+import com.kawtar.listshopping.ProductToSend;
 
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +29,7 @@ public class FinalResponseAdapter extends ArrayAdapter<ResponseFromServer> {
 	private List<ResponseFromServer> items;
 	private int layoutResourceId;
 	private Context context;
-    public static List<Product> li;
+    public static List<ProductToSend> li;
 	public FinalResponseAdapter(Context context, int layoutResourceId, List<ResponseFromServer> items) {
 		super(context, layoutResourceId, items);
 		this.layoutResourceId = layoutResourceId;
@@ -79,7 +78,7 @@ public class FinalResponseAdapter extends ArrayAdapter<ResponseFromServer> {
 		holder.detailsOffer.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-                li=new ArrayList<Product>();
+                li=new ArrayList<ProductToSend>();
 				mIntentD = new Intent(context,DetailsFinalListActivity.class);
 				getContext().startActivity(mIntentD);
                 mIntentD.putExtra("SuperMarket",holder.offerItem.getSuperMarket().getName());

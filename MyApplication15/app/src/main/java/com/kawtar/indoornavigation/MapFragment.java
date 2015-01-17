@@ -5,39 +5,25 @@ package com.kawtar.indoornavigation;
  */
 
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.kawtar.myapplication.PrepareIndoorActivity;
 import com.example.kawtar.myapplication.R;
-import com.kawtar.listshopping.Product;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.kawtar.listshopping.ProductToSend;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class MapFragment extends Fragment
 {
@@ -111,14 +97,14 @@ public class MapFragment extends Fragment
         return layout;
     }
 
-    public void drawMarker(Product item)
+    public void drawMarker(ProductToSend item)
     {
         Bitmap combinedBitmap = getCombinedBitmap(map, marker,item);
 
         //Attach the canvas to the ImageView
         img.setImageDrawable(new BitmapDrawable(getResources(), combinedBitmap));
     }
-    private Bitmap getCombinedBitmap(Bitmap b, Bitmap b2,Product item) {
+    private Bitmap getCombinedBitmap(Bitmap b, Bitmap b2,ProductToSend item) {
         Bitmap drawnBitmap = null;
 
         try {

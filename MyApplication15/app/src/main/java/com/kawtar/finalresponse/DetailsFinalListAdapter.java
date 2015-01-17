@@ -13,18 +13,18 @@ import android.widget.TextView;
 
 import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.ResponseFromServer;
-import com.kawtar.listshopping.Product;
+import com.kawtar.listshopping.ProductToSend;
 
-public class DetailsFinalListAdapter extends ArrayAdapter<Product> {
+public class DetailsFinalListAdapter extends ArrayAdapter<ProductToSend> {
 	
-	private List<Product> items;
+	private List<ProductToSend> items;
 	private int layoutResourceId;
 	private Context context;
-	public DetailsFinalListAdapter(Context context, int layoutResourceId, List<Product> items) {
+	public DetailsFinalListAdapter(Context context, int layoutResourceId, List<ProductToSend> items) {
 		super(context, layoutResourceId, items);
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
-		this.items=new ArrayList<Product>();
+		this.items=new ArrayList<ProductToSend>();
 		this.items = items;
 	}
 	@Override
@@ -57,7 +57,7 @@ public class DetailsFinalListAdapter extends ArrayAdapter<Product> {
 	}
 
 	public static class toShopItemHolder {
-		Product offerItem;
+		ProductToSend offerItem;
 		TextView name;
 		TextView brand;
 		TextView status;

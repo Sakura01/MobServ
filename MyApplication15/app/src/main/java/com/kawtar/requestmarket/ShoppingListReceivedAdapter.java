@@ -2,7 +2,7 @@ package com.kawtar.requestmarket;
 import java.util.List;
 
 import com.example.kawtar.myapplication.R;
-import com.kawtar.listshopping.Product;
+import com.kawtar.listshopping.ProductToSend;
 
 
 import android.app.Activity;
@@ -12,19 +12,17 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class ShoppingListReceivedAdapter extends ArrayAdapter<Product> {
+public class ShoppingListReceivedAdapter extends ArrayAdapter<ProductToSend> {
 
 	
-	private List<Product> items;
+	private List<ProductToSend> items;
 	private int layoutResourceId;
 	private Context context;
     private static final String[] color={"red","blue","black","brown","green","none"
@@ -33,13 +31,13 @@ public class ShoppingListReceivedAdapter extends ArrayAdapter<Product> {
     };
     private static final String[] name={"pencil","milk","sugar","orange juice","apple juice","water"
     };
-	public ShoppingListReceivedAdapter(Context context, int layoutResourceId, List<Product> items) {
+	public ShoppingListReceivedAdapter(Context context, int layoutResourceId, List<ProductToSend> items) {
 		super(context, layoutResourceId, items);
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
 		this.items = items;
 	}
-	public List<Product> getShoppingList()
+	public List<ProductToSend> getShoppingList()
 	{
 		return items;
 	}
@@ -81,7 +79,7 @@ public class ShoppingListReceivedAdapter extends ArrayAdapter<Product> {
 	}
 
 	public static class toShopItemHolder {
-		Product toShopItem;
+		ProductToSend toShopItem;
         AutoCompleteTextView name;
 		TextView quantity;
 		ImageButton removeItem;

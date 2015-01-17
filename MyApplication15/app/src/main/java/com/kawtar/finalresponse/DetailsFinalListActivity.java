@@ -6,19 +6,14 @@ import java.util.List;
 import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.ResponseFromServer;
 
-import com.kawtar.listshopping.Product;
+import com.kawtar.listshopping.ProductToSend;
 import com.kawtar.mainUI.MainActivity;
-import com.kawtar.mainUI.SplashActivity;
-import com.kawtar.requestmarket.RequestActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
@@ -30,19 +25,19 @@ public class DetailsFinalListActivity extends Activity{
 	private DetailsFinalListAdapter adapter;
 	private ListView itemOfferListView;
 	private Button backButton;
-	private List<Product> list;
+	private List<ProductToSend> list;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.details_list_activity);
 		setupListViewAdapter();
-        list=new ArrayList<Product>();
+        list=new ArrayList<ProductToSend>();
 	}
 	private void setupListViewAdapter() {
-		adapter = new DetailsFinalListAdapter(DetailsFinalListActivity.this, R.layout.details_list_layout, new ArrayList<Product>());
+		adapter = new DetailsFinalListAdapter(DetailsFinalListActivity.this, R.layout.details_list_layout, new ArrayList<ProductToSend>());
 		itemOfferListView = (ListView)findViewById(R.id.ItemsDetailedList);
 		itemOfferListView.setAdapter(adapter);
         String supermarketName=FinalResponseAdapter.mIntentD.getStringExtra("SuperMarket");
-        List<ResponseFromServer> offer= RequestActivity.getOfferFromServer();
+        List<ResponseFromServer> offer = null;//RequestActivity.getOfferFromServer();
         if(offer.size()!=0)
         {
             for(int i=0;i<offer.size();i++)
@@ -56,7 +51,7 @@ public class DetailsFinalListActivity extends Activity{
             }
             for(int j=0;j<list.size();j++)
             {
-                Product product = list.get(j);
+                ProductToSend product = list.get(j);
                 adapter.insert(product, 0);
             }
         }

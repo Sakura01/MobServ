@@ -56,7 +56,6 @@
 
         </activity>
         <activity android:label="@string/title_indoor_map_activity" android:name="com.kawtar.indoornavigation.IndoorMapActivity" android:screenOrientation="landscape" > </activity>
-        <activity android:label="@string/title_activity_request" android:name="com.kawtar.requestmarket.RequestActivity" android:screenOrientation="landscape" > </activity>
         <activity android:label="@string/title_activity_main" android:name="com.kawtar.mainUI.MainActivity" android:screenOrientation="landscape"  > </activity>
         <activity android:label="@string/title_activity_finalresponse" android:name="com.kawtar.finalresponse.FinalResponseActivity" android:screenOrientation="landscape"  > </activity>
         <activity android:label="@string/title_activity_maps" android:name=".OutdoorMapActivity" android:screenOrientation="landscape"  > </activity>

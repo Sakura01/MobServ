@@ -1,19 +1,13 @@
 package com.kawtar.indoornavigation;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.kawtar.myapplication.OutdoorMapActivity;
 import com.kawtar.indoornavigation.ShoppingListFragment.OnShoppingItemSelectedListener;
-import com.kawtar.listshopping.Product;
-import com.kawtar.mainUI.MainActivity;
+import com.kawtar.listshopping.ProductToSend;
 import com.kawtar.mainUI.SplashActivity;
 
 
@@ -52,7 +46,7 @@ public class IndoorMapActivity extends Activity implements OnShoppingItemSelecte
 
     }
 
-    public void onShoppingItemSelected(Product item) {
+    public void onShoppingItemSelected(ProductToSend item) {
         Log.v(TAG_INDOOR_ACTIVITY,item.getName());
         Toast.makeText(getApplicationContext(), item.getName(), Toast.LENGTH_LONG).show();
         if(indoorMap){

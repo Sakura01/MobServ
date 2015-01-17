@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.kawtar.myapplication.R;
-
+import com.kawtar.jsoncontrol.RequestList;
+import com.kawtar.jsoncontrol.ResponseFromServer;
+import com.kawtar.listshopping.ProductToSend;
+import com.shopping.list.bean.Product;
+import com.kawtar.mainUI.MainActivity;
 import com.shopping.list.adapter.ShoppinglistProductMappingAdapter;
 import com.shopping.list.adapter.StoreAdapter;
 
@@ -18,18 +22,22 @@ import com.shopping.list.helper.ProcessColorHelper;
 
 import android.app.AlertDialog;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -39,6 +47,17 @@ import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 
 public class ShoppinglistActivity extends AbstractShoppinglistActivity {
@@ -69,7 +88,14 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 	private int viewType;
 
-    List<ShoppinglistProductMapping> listToSubmit;
+
+    //Com with server
+
+    private Intent				mIntent;
+    private String  result;
+    private RequestList reqlist;
+    private List<ResponseFromServer> off;
+    private int cpt=0;
 	/**
 	 * because this activity is the "Home" of the app, but we have two different
 	 * viewTypes, here are the actions to perform when the viewtype =
@@ -93,15 +119,14 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 			this.buttonSubmitList = (Button) this
 					.findViewById(R.id.buttonSubmitList);
-        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
-        listToSubmit=ShoppinglistProductMappingAdapter.get();
 
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
-                for (int i = 0; i < listToSubmit.size(); i++)
-                {
-                    Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
-                }
+                //for (int i = 0; i < listToSubmit.size(); i++)
+                //{
+                  //  Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
+                //}
+                new PostTask().execute();
                 //Toast.makeText(getApplicationContext(), "M1", Toast.LENGTH_SHORT).show();
             }
         });
@@ -276,14 +301,13 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 		this.buttonSubmitList = (Button) this
 				.findViewById(R.id.buttonSubmitList);
-        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
-        listToSubmit=ShoppinglistProductMappingAdapter.get();
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
-               for(int i=0;i<listToSubmit.size();i++)
-               {
-                   Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
-               }
+                new PostTask().execute();
+               //for(int i=0;i<listToSubmit.size();i++)
+               //{
+                 //  Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
+               //}
                //Toast.makeText(getApplicationContext(), "M2", Toast.LENGTH_SHORT).show();
             }
         });
@@ -611,5 +635,137 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		}
 
 	}
+    public void createDialog(final String title, String text) {
+        // Hide keyboard and show it at demand
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        AlertDialog.Builder ad = new AlertDialog.Builder(ShoppinglistActivity.this);
+        // Button to create an alert dialog for setting the connection to the server
+        ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if(title.equals("Network"))
+                {
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                }
+                else
+                {
+                    Intent intent=new Intent();
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }
+
+            }
+        });
+        // Set the alert dialog title, create it and show it
+        ad.setTitle(title + ":" + text);
+        AlertDialog alert1 = ad.create();
+        alert1.show();
+    }
+    private class PostTask extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+        private int		reqStatus;
+        private String URL="http://smartshoppingproject.appspot.com/request";
+        protected void onPreExecute() {
+            /**
+             * Set a process dialog for showing the uploading's progress
+             */
+            pDialog = new ProgressDialog(ShoppinglistActivity.this);
+            pDialog.setMessage("Sending request to the server...");
+            pDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            reqStatus = requestList();
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (reqStatus== HttpStatus.SC_OK) {
+                        Log.i("What the server sends back:", result);
+
+                        if (result != null)
+                        {
+                             Log.i("TAG",result);
+                            //Toast.makeText(getApplicationContext(), "Result"+result, Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            createDialog("Warning", "There is no offer, sorry dude");
+                        }
+                    }
+                    else
+                    {
+                        // Show the alert dialog
+                        createDialog("Request", "An error has occured,please try again" + reqStatus);
+                    }
+                }
+            });
+            return null;
+        }
+
+        @Override
+
+        protected void onPostExecute(Void res) {
+
+            if (null != pDialog && pDialog.isShowing())
+            {
+                pDialog.dismiss();
+                //mIntent=new Intent(ShoppinglistActivity.this,FinalResponseActivity.class);
+                //startActivity(mIntent);
+                Log.i("tr","fini");
+                //Toast.makeText(getApplicationContext(), "Finish", Toast.LENGTH_LONG).show();
+            }
+            super.onPostExecute(res);
+        }
+        public int requestList()
+        {
+            int code=0;
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 10000); //Timeout Limit
+            HttpPost request = new HttpPost(URL);
+            HttpResponse response;
+            List<ShoppinglistProductMapping>listToSubmit=new ArrayList<ShoppinglistProductMapping>();
+            listToSubmit=ShoppinglistProductMappingAdapter.get();
+            List<ProductToSend> list=new ArrayList<ProductToSend>();
+            ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
+            list.add(product);
+            //for(int i=0;i<listToSubmit.size();i++)
+            //{
+                //String p=listToSubmit.get(i).toString();
+                //String[] splited = p.split("\\s+");
+                //ProductToSend product=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
+               // ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
+              //  list.add(product);
+            //}
+            reqlist=new RequestList(list, MainActivity.getDistanceRange(), MainActivity.getBudget(),MainActivity.getUserLatitude(),MainActivity.getUserLongitude());
+            Log.i("DistR", ""+MainActivity.getDistanceRange());
+            Log.i("Budg", ""+MainActivity.getBudget());
+            Log.i("Lat", ""+MainActivity.getUserLatitude());
+            Log.i("Long", ""+MainActivity.getUserLongitude());
+            Log.i("product", ""+list.get(0).getName());
+
+            try {
+
+                StringEntity se = new StringEntity(reqlist.toJSON());
+                Log.i("list in async task to send",""+reqlist.toJSON().toString());
+                se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                request.setEntity(se);
+                response = httpClient.execute(request);
+                code=response.getStatusLine().getStatusCode();
+                result = EntityUtils.toString(response.getEntity());
+            } catch (ClientProtocolException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return code;
+        }
+
+    }
 
 }

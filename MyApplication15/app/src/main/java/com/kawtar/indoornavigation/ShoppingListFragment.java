@@ -16,19 +16,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
 import com.example.kawtar.myapplication.OutdoorMapActivity;
 import com.example.kawtar.myapplication.R;
-import com.kawtar.finalresponse.FinalResponseAdapter;
 import com.kawtar.jsoncontrol.ResponseFromServer;
-import com.kawtar.listshopping.Product;
-import com.kawtar.requestmarket.RequestActivity;
+import com.kawtar.listshopping.ProductToSend;
 
 public class ShoppingListFragment extends Fragment {
 
@@ -67,7 +63,7 @@ public class ShoppingListFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface OnShoppingItemSelectedListener {
-        public void onShoppingItemSelected(Product mSelectedFromList);
+        public void onShoppingItemSelected(ProductToSend mSelectedFromList);
     }
 
     @Override
@@ -82,8 +78,8 @@ public class ShoppingListFragment extends Fragment {
 
     private void displayListView() {
         String supermarketName=OutdoorMapActivity.superMarketMap;
-        List<ResponseFromServer> offer= RequestActivity.getOfferFromServer();
-            List<Product> list=new ArrayList<Product>();
+        List<ResponseFromServer> offer=null;// RequestActivity.getOfferFromServer();
+            List<ProductToSend> list=new ArrayList<ProductToSend>();
             if(offer.size()!=0)
             {
                 for(int i=0;i<offer.size();i++)
@@ -94,7 +90,7 @@ public class ShoppingListFragment extends Fragment {
                     }
                 }
                 //create an ArrayAdaptar from the String Array
-                ArrayAdapter<Product> dataAdapter = new ArrayAdapter<Product>(getActivity(),
+                ArrayAdapter<ProductToSend> dataAdapter = new ArrayAdapter<ProductToSend>(getActivity(),
                         R.layout.shopping_list_fragment, list);
                 final ListView listView = (ListView) getView().findViewById(R.id.listofShoppingItems);
                 // Assign adapter to ListView
@@ -103,7 +99,7 @@ public class ShoppingListFragment extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
                         // Send the URL to the host activity
-                        Product mSelectedFromList = (Product) (listView.getItemAtPosition(position));
+                        ProductToSend mSelectedFromList = (ProductToSend) (listView.getItemAtPosition(position));
                         mSelectedFromList.setMarker(true);
                         mListener.onShoppingItemSelected(mSelectedFromList);
                     }
@@ -123,8 +119,8 @@ public class ShoppingListFragment extends Fragment {
         ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                Intent activity=new Intent(getActivity(), RequestActivity.class);
-                startActivity(activity);
+               // Intent activity=new Intent(getActivity(), RequestActivity.class);
+                //startActivity(activity);
 
             }
         });

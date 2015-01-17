@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-public class Product implements Serializable {
+public class ProductToSend implements Serializable {
     private static final long serialVersionUID = -5435670920302756945L;
 
     private String name = "";
@@ -18,7 +18,7 @@ public class Product implements Serializable {
     private float positiony;
     private float price;
     private boolean marker;
-    public Product(String name, int quantity,float positionx,float positiony,float price,boolean marker) {
+    public ProductToSend(String name, int quantity, float positionx, float positiony, float price, boolean marker) {
 
         this.setName(name);
         this.setQuantity(quantity);
@@ -27,10 +27,6 @@ public class Product implements Serializable {
         this.setPrice(price);
         this.setMarker(marker);
 
-    }
-    public String toString()
-    {
-        return String.format("%s ", name);
     }
     public void setMarker(boolean marker)
     {

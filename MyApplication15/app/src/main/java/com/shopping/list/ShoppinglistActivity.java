@@ -460,6 +460,7 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 				for (final ShoppinglistProductMapping mapping : shoppinglistProductMappingsToSend) {
 					if (mapping.isChecked() == GlobalValues.NO) {
 						text = text + "- " + mapping.toString() + "\n";
+                        Log.i("DATA",text);
 					}
 				}
 			}
@@ -720,7 +721,11 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
             list.add(product);
             List<String>li=new ArrayList<String>();
-
+            for (final ShoppinglistProductMapping mapping : shoppinglistProductMappingsToShow) {
+                if (mapping.isChecked() == GlobalValues.YES) {
+                    Log.i("DATA",mapping.toString());
+                }
+            }
             //for(int i=0;i<listToSubmit.size();i++)
             //{
                 //String p=listToSubmit.get(i).toString();

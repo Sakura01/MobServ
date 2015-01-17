@@ -53,7 +53,7 @@ public class ProductToSend implements Serializable {
     public String getUnit() {
         return unit;
     }
-    public void setUnit(String name) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
     public void setPositiony(float positiony)

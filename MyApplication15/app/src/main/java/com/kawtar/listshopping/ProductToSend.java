@@ -7,10 +7,8 @@ import java.io.Serializable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.util.Log;
-public class ProductToSend implements Serializable {
-    private static final long serialVersionUID = -5435670920302756945L;
+public class ProductToSend  {
+    //private static final long serialVersionUID = -5435670920302756945L;
 
     private String name = "";
     private String id = "";
@@ -97,5 +95,33 @@ public class ProductToSend implements Serializable {
             return null;
         }
 
+    }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ProductToSend other = (ProductToSend) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+    @Override
+    public String toString() {
+        return name;
     }
 }

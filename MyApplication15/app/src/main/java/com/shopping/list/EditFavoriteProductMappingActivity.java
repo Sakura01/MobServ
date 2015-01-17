@@ -122,11 +122,6 @@ public class EditFavoriteProductMappingActivity extends AbstractShoppinglistActi
 
 			public void onClick(final View v) {
 				if (EditFavoriteProductMappingActivity.super.setErrorOnEmptyEditTexts(editTextIds)) {
-
-					// pr�fen, ob Produkt in Benutzung, wenn nicht updaten,
-					// sonst
-					// neu anlegen
-					//
 					final String quantity = EditFavoriteProductMappingActivity.this.editTextQuantity
 							.getText().toString();
 					final Unit selectedUnit = (Unit) EditFavoriteProductMappingActivity.this.spinnerUnits

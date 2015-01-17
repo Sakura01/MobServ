@@ -88,7 +88,7 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 	private int viewType;
 
-    private List<ShoppinglistProductMapping>listToSubmit;
+    private List<String>listToSubmit;
 
     //Com with server
     private String  result;
@@ -118,8 +118,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 			this.buttonSubmitList = (Button) this
 					.findViewById(R.id.buttonSubmitList);
-        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
-        listToSubmit=ShoppinglistProductMappingAdapter.get();
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 new PostTask().execute();
@@ -296,8 +294,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 		this.buttonSubmitList = (Button) this
 				.findViewById(R.id.buttonSubmitList);
-        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
-        listToSubmit=ShoppinglistProductMappingAdapter.get();
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 new PostTask().execute();
@@ -721,10 +717,10 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             for(int i=0;i<listToSubmit.size();i++)
             {
                 String p=listToSubmit.get(i).toString();
-                String[] splited = p.split("\\s+");
-                Log.i("N",splited[2]);
-                Log.i("U",splited[1]);
-                Log.i("Q",splited[0]);
+                //String[] splited = p.split("\\s+");
+                //Log.i("N",splited[2]);
+                //Log.i("U",splited[1]);
+                Log.i("L",p);
             //ProductToSend product=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
             // ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
             //  list.add(product);

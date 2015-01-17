@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ShoppinglistProductMappingAdapter extends ArrayAdapter<ShoppinglistProductMapping> {
-    private static List<ShoppinglistProductMapping>list;
 	private final Context context;
 	private final List<ShoppinglistProductMapping> values;
 
@@ -26,7 +25,6 @@ public class ShoppinglistProductMappingAdapter extends ArrayAdapter<Shoppinglist
 		super(context, R.layout.list_row, values);
 		this.context = context;
 		this.values = values;
-        this.list=new ArrayList<ShoppinglistProductMapping>();
 	}
 
 	@SuppressLint("ViewHolder")
@@ -51,7 +49,6 @@ public class ShoppinglistProductMappingAdapter extends ArrayAdapter<Shoppinglist
 			// paint the strikethrough
 			checkBox.setImageResource(R.drawable.checked_box);
 			textView.setTextColor(textView.getResources().getColor(R.color.greyed_text_color));
-            list.add(shoppinglistProductMappingToShow);
 		} else if (shoppinglistProductMappingToShow.isChecked() == GlobalValues.NO) {
 			// remove the strikethrough
 			checkBox.setImageResource(R.drawable.check_box);
@@ -61,8 +58,4 @@ public class ShoppinglistProductMappingAdapter extends ArrayAdapter<Shoppinglist
 
 		return rowView;
 	}
-    public static List<ShoppinglistProductMapping> get()
-    {
-        return list;
-    }
 }

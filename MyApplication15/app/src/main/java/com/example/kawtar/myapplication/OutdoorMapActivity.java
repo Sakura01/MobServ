@@ -65,6 +65,8 @@ public class OutdoorMapActivity extends FragmentActivity implements LocationList
         setContentView(R.layout.outdoor_map_activity_layout);
         String supermarketName=FinalResponseAdapter.mIntentO.getStringExtra("SuperMarketName");
         String result= ShoppinglistActivity.getResultServer();
+        Log.i("RESULT",result);
+        Log.i("MAP",supermarketName);
         if (result != null) {
             List<ResponseFromServer> offer = ResponseFromServer.parseJSONResult(result);
             Toast.makeText(getApplicationContext(), "Details"+result, Toast.LENGTH_LONG).show();

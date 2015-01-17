@@ -26,6 +26,7 @@ import com.kawtar.listshopping.Dijkstra;
 import com.kawtar.listshopping.Graph;
 import com.kawtar.listshopping.Link;
 import com.kawtar.listshopping.ProductToSend;
+import com.shopping.list.ShoppinglistActivity;
 import com.shopping.list.bean.Product;
 
 import java.util.LinkedList;
@@ -83,7 +84,8 @@ public class ShoppingListFragment extends Fragment {
 
     private void displayListView() {
         String supermarketName=OutdoorMapActivity.superMarketMap;
-        List<ResponseFromServer> offer=null;// RequestActivity.getOfferFromServer();
+        String result= ShoppinglistActivity.getResultServer();
+        List<ResponseFromServer> offer= ResponseFromServer.parseJSONResult(result);
             List<ProductToSend> list=new ArrayList<ProductToSend>();
             if(offer.size()!=0)
             {

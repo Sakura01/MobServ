@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.RequestList;
-import com.kawtar.jsoncontrol.ResponseFromServer;
 import com.kawtar.listshopping.ProductToSend;
-import com.shopping.list.bean.Product;
 import com.kawtar.mainUI.MainActivity;
 import com.shopping.list.adapter.ShoppinglistProductMappingAdapter;
 import com.shopping.list.adapter.StoreAdapter;
@@ -46,7 +44,6 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -87,8 +84,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 	private List<Store> storesToShowInOverview;
 
 	private int viewType;
-
-    private List<String>listToSubmit;
 
     //Com with server
     private String  result;
@@ -724,16 +719,18 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             for (final ShoppinglistProductMapping mapping : shoppinglistProductMappingsToShow) {
                 if (mapping.isChecked() == GlobalValues.YES) {
                     Log.i("DATA",mapping.toString());
+                    li.add(mapping.toString());
                 }
             }
-            //for(int i=0;i<listToSubmit.size();i++)
-            //{
-                //String p=listToSubmit.get(i).toString();
+            for(int i=0;i<li.size();i++)
+            {
+                String p=li.get(i).toString();
+                Log.i("DATA_LIST",p);
                 //String[] splited = p.split("\\s+");
                 //ProductToSend product=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
                // ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
               //  list.add(product);
-            //}
+            }
             reqlist=new RequestList(list, MainActivity.getDistanceRange(), MainActivity.getBudget(),MainActivity.getUserLatitude(),MainActivity.getUserLongitude());
             Log.i("DistR", ""+MainActivity.getDistanceRange());
             Log.i("Budg", ""+MainActivity.getBudget());

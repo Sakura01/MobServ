@@ -8,6 +8,7 @@ import com.kawtar.jsoncontrol.ResponseFromServer;
 
 import com.kawtar.listshopping.ProductToSend;
 import com.kawtar.mainUI.MainActivity;
+import com.shopping.list.ShoppinglistActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,29 +38,29 @@ public class DetailsFinalListActivity extends Activity{
 		itemOfferListView = (ListView)findViewById(R.id.ItemsDetailedList);
 		itemOfferListView.setAdapter(adapter);
         String supermarketName=FinalResponseAdapter.mIntentD.getStringExtra("SuperMarket");
-        List<ResponseFromServer> offer = null;//RequestActivity.getOfferFromServer();
-        if(offer.size()!=0)
-        {
-            for(int i=0;i<offer.size();i++)
-            {
-                if(offer.get(i).getSuperMarket().getName().equals(supermarketName))
-                {
-                    String superMarket=offer.get(i).getSuperMarket().getName();
-                    Toast.makeText(getApplicationContext(),"Name:"+ superMarket, Toast.LENGTH_LONG).show();
-                    list=offer.get(i).getList();
+        String result= ShoppinglistActivity.getResultServer();
+        if (result != null) {
+            List<ResponseFromServer> offer = ResponseFromServer.parseJSONResult(result);
+            if (offer.size() != 0) {
+                for (int i = 0; i < offer.size(); i++) {
+                    if (offer.get(i).getSuperMarket().getName().equals(supermarketName)) {
+                        String superMarket = offer.get(i).getSuperMarket().getName();
+                        Toast.makeText(getApplicationContext(), "Name:" + superMarket, Toast.LENGTH_LONG).show();
+                        list = offer.get(i).getList();
+                    }
                 }
-            }
-            for(int j=0;j<list.size();j++)
-            {
-                ProductToSend product = list.get(j);
-                adapter.insert(product, 0);
+                for (int j = 0; j < list.size(); j++) {
+                    ProductToSend product = list.get(j);
+                    adapter.insert(product, 0);
+                }
+            } else {
+                createDialog("Error offer", "A problem has occured, sorry");
             }
         }
         else
         {
             createDialog("Error offer", "A problem has occured, sorry");
         }
-
 
 	}
 	public  void createDialog(final String title, String text) {

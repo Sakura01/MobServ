@@ -734,7 +734,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
                //Log.i("Quanti",splited[0]);
                 ProductToSend productSend=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
                 listToSubmit.add(productSend);
-
             }
             //ProductToSend productSend=new ProductToSend("milk",1,0,0,0,false);
 

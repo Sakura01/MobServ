@@ -55,7 +55,7 @@ public class ShoppinglistProductMappingAdapter extends ArrayAdapter<Shoppinglist
 		} else if (shoppinglistProductMappingToShow.isChecked() == GlobalValues.NO) {
 			// remove the strikethrough
 			checkBox.setImageResource(R.drawable.check_box);
-            list.remove(shoppinglistProductMappingToShow);
+            //list.remove(shoppinglistProductMappingToShow);
 
 		}
 

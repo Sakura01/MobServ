@@ -69,9 +69,7 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 	private int viewType;
 
-    int i=0;
-
-    List<ShoppinglistProductMapping> listToSubmit=new ArrayList<ShoppinglistProductMapping>();
+    List<ShoppinglistProductMapping> listToSubmit;
 	/**
 	 * because this activity is the "Home" of the app, but we have two different
 	 * viewTypes, here are the actions to perform when the viewtype =
@@ -95,6 +93,7 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 			this.buttonSubmitList = (Button) this
 					.findViewById(R.id.buttonSubmitList);
+        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
         listToSubmit=ShoppinglistProductMappingAdapter.get();
 
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
@@ -277,6 +276,7 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 		this.buttonSubmitList = (Button) this
 				.findViewById(R.id.buttonSubmitList);
+        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
         listToSubmit=ShoppinglistProductMappingAdapter.get();
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {

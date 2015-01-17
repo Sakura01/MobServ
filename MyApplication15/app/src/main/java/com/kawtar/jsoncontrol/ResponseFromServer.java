@@ -108,7 +108,7 @@ public class ResponseFromServer
                 JSONObject jb2 = listShopping.getJSONObject(j);
                 String name = jb2.getString("name");
                 String unit = jb2.getString("unit");
-                String initQuantity=jb2.getString("init_quantity");
+                String initQuantity=jb2.getString("quantity");
                 String price = jb2.getString("price");
                 String product_positionx = jb2.getString("product_positionx");
                 String product_positiony = jb2.getString("product_positiony");

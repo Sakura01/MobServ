@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,14 +19,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-
 import com.example.kawtar.myapplication.OutdoorMapActivity;
 import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.ResponseFromServer;
+import com.kawtar.listshopping.Dijkstra;
+import com.kawtar.listshopping.Graph;
+import com.kawtar.listshopping.Link;
 import com.kawtar.listshopping.ProductToSend;
+import com.shopping.list.bean.Product;
+
+import java.util.LinkedList;
 
 public class ShoppingListFragment extends Fragment {
-
+    private List<ProductToSend> nodes;
+    private List<Link> links;
     private  OnShoppingItemSelectedListener mListener;
     private final String TAG_SHOPPING_LIST_FRAGMENT="ShoppingListFragment";
     @Override
@@ -87,11 +92,42 @@ public class ShoppingListFragment extends Fragment {
                     if(offer.get(i).getSuperMarket().getIndoorMapUrl().equals(supermarketName))
                     {
                         list=offer.get(i).getList();
+                        break;
                     }
+                }
+                //List to sort out
+                nodes = new ArrayList<ProductToSend>();
+                links = new ArrayList<Link>();
+                for (int i = 0; i < list.size(); i++) {
+
+                    ProductToSend location = new ProductToSend(list.get(i).getName(), list.get(i).getName(),list.get(i).getQuantity(),list.get(i).getUnit(),list.get(i).getPositionx(),list.get(i).getPositiony(),list.get(i).getPrice(),false);
+                    nodes.add(location);
+                }
+                for (int j=0; j<list.size(); j++){
+                    for(int k=0; k<list.size();k++){
+                        if(k!=j){
+                            addLane("Edge"+(j+k),j,k);
+                        }
+
+                    }
+                }
+
+                // Lets check from location Loc_1 to Loc_10
+                Graph graph = new Graph(nodes, links);
+                Dijkstra dijkstra = new Dijkstra(graph);
+                dijkstra.execute(nodes.get(0));
+                LinkedList<ProductToSend> path = dijkstra.getPath(nodes.get(10));
+
+
+                List<ProductToSend>listSorted=new ArrayList<ProductToSend>();
+                for (ProductToSend vertex : path) {
+                    System.out.println(vertex);
+                    listSorted.add(vertex);
+
                 }
                 //create an ArrayAdaptar from the String Array
                 ArrayAdapter<ProductToSend> dataAdapter = new ArrayAdapter<ProductToSend>(getActivity(),
-                        R.layout.shopping_list_fragment, list);
+                        R.layout.shopping_list_fragment, listSorted);//list
                 final ListView listView = (ListView) getView().findViewById(R.id.listofShoppingItems);
                 // Assign adapter to ListView
                 listView.setAdapter(dataAdapter);
@@ -128,5 +164,9 @@ public class ShoppingListFragment extends Fragment {
         ad.setTitle(title + ":" + text);
         AlertDialog alert1 = ad.create();
         alert1.show();
+    }
+    private void addLane(String laneId, int sourceLocNo, int destLocNo) {
+        Link lane = new Link(laneId,nodes.get(sourceLocNo), nodes.get(destLocNo));
+        links.add(lane);
     }
 }

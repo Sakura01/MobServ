@@ -44,10 +44,12 @@ public class DetailsFinalListActivity extends Activity{
             Toast.makeText(getApplicationContext(), "Details"+result, Toast.LENGTH_LONG).show();
             if (offer.size() != 0) {
                 for (int i = 0; i < offer.size(); i++) {
-                    if (offer.get(i).getSuperMarket().getName().equals(supermarketName)) {
+                    if (offer.get(i).getSuperMarket().getName().equals(supermarketName))
+                    {
                         String superMarket = offer.get(i).getSuperMarket().getName();
                         Toast.makeText(getApplicationContext(), "Name in details:" + superMarket, Toast.LENGTH_LONG).show();
                         list = offer.get(i).getList();
+                        break;
 
                     }
                 }

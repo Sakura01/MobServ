@@ -63,14 +63,14 @@ public class ProductToSend  {
     {
         this.positiony=positiony;
     }
-    public double getPositiony (){
+    public float getPositiony (){
         return positiony;
     }
     public void setPositionx(float positionx)
     {
         this.positionx=positionx;
     }
-    public double getPositionx (){
+    public float getPositionx (){
         return positionx;
     }
     public void setPrice(float price)

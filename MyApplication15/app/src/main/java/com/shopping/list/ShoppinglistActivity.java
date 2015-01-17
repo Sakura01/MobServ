@@ -277,7 +277,7 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 		this.buttonSubmitList = (Button) this
 				.findViewById(R.id.buttonSubmitList);
-        //listToSubmit=ShoppinglistProductMappingAdapter.get();
+        listToSubmit=ShoppinglistProductMappingAdapter.get();
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                for(int i=0;i<listToSubmit.size();i++)

@@ -88,14 +88,13 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 	private int viewType;
 
+    private List<ShoppinglistProductMapping>listToSubmit;
 
     //Com with server
-
-    private Intent				mIntent;
     private String  result;
+
     private RequestList reqlist;
-    private List<ResponseFromServer> off;
-    private int cpt=0;
+
 	/**
 	 * because this activity is the "Home" of the app, but we have two different
 	 * viewTypes, here are the actions to perform when the viewtype =
@@ -119,15 +118,11 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 			this.buttonSubmitList = (Button) this
 					.findViewById(R.id.buttonSubmitList);
-
+        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
+        listToSubmit=ShoppinglistProductMappingAdapter.get();
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
-                //for (int i = 0; i < listToSubmit.size(); i++)
-                //{
-                  //  Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
-                //}
                 new PostTask().execute();
-                //Toast.makeText(getApplicationContext(), "M1", Toast.LENGTH_SHORT).show();
             }
         });
 		// handle clicks on addToHistory button
@@ -301,14 +296,11 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 		this.buttonSubmitList = (Button) this
 				.findViewById(R.id.buttonSubmitList);
+        listToSubmit=new ArrayList<ShoppinglistProductMapping>();
+        listToSubmit=ShoppinglistProductMappingAdapter.get();
         this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 new PostTask().execute();
-               //for(int i=0;i<listToSubmit.size();i++)
-               //{
-                 //  Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
-               //}
-               //Toast.makeText(getApplicationContext(), "M2", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -689,7 +681,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
                         if (result != null)
                         {
                              Log.i("TAG",result);
-                            //Toast.makeText(getApplicationContext(), "Result"+result, Toast.LENGTH_LONG).show();
                         }
                         else
                         {
@@ -716,7 +707,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
                 //mIntent=new Intent(ShoppinglistActivity.this,FinalResponseActivity.class);
                 //startActivity(mIntent);
                 Log.i("tr","fini");
-                //Toast.makeText(getApplicationContext(), "Finish", Toast.LENGTH_LONG).show();
             }
             super.onPostExecute(res);
         }
@@ -727,8 +717,18 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 10000); //Timeout Limit
             HttpPost request = new HttpPost(URL);
             HttpResponse response;
-            List<ShoppinglistProductMapping>listToSubmit=new ArrayList<ShoppinglistProductMapping>();
-            listToSubmit=ShoppinglistProductMappingAdapter.get();
+
+            for(int i=0;i<listToSubmit.size();i++)
+            {
+                String p=listToSubmit.get(i).toString();
+                String[] splited = p.split("\\s+");
+                Log.i("N",splited[2]);
+                Log.i("U",splited[1]);
+                Log.i("Q",splited[0]);
+            //ProductToSend product=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
+            // ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
+            //  list.add(product);
+            }
             List<ProductToSend> list=new ArrayList<ProductToSend>();
             ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
             list.add(product);

@@ -13,12 +13,13 @@ public class ProductToSend implements Serializable {
     private static final long serialVersionUID = -5435670920302756945L;
 
     private String name = "";
+    private String unit = "";
     private int quantity ;
     private float positionx;
     private float positiony;
     private float price;
     private boolean marker;
-    public ProductToSend(String name, int quantity, float positionx, float positiony, float price, boolean marker) {
+    public ProductToSend(String name, int quantity, String unit,float positionx, float positiony, float price, boolean marker) {
 
         this.setName(name);
         this.setQuantity(quantity);
@@ -26,6 +27,7 @@ public class ProductToSend implements Serializable {
         this.setPositiony(positiony);
         this.setPrice(price);
         this.setMarker(marker);
+        this.setUnit(unit);
 
     }
     public void setMarker(boolean marker)
@@ -47,6 +49,12 @@ public class ProductToSend implements Serializable {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public String getUnit() {
+        return unit;
+    }
+    public void setUnit(String name) {
+        this.unit = unit;
     }
     public void setPositiony(float positiony)
     {
@@ -74,6 +82,7 @@ public class ProductToSend implements Serializable {
         JSONObject jsonObject= new JSONObject();
         try {
             jsonObject.put("name", getName());
+            jsonObject.put("unit", getUnit());
             jsonObject.put("quantity", String.valueOf(getQuantity()));
             return jsonObject;
         } catch (JSONException e)

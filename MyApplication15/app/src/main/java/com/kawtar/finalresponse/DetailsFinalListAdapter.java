@@ -37,12 +37,10 @@ public class DetailsFinalListAdapter extends ArrayAdapter<ProductToSend> {
 
 		holder = new toShopItemHolder();
 		holder.offerItem = items.get(position);
-		
-		holder.status = (TextView)row.findViewById(R.id.status);
-		holder.brand = (TextView)row.findViewById(R.id.brand);
+
 		holder.name = (TextView)row.findViewById(R.id.name);
-		holder.color= (TextView)row.findViewById(R.id.color);
 		holder.quantity = (TextView)row.findViewById(R.id.quantity);
+        holder.unit = (TextView)row.findViewById(R.id.unity);
 		holder.price = (TextView)row.findViewById(R.id.price);
 		row.setTag(holder);
 
@@ -53,15 +51,14 @@ public class DetailsFinalListAdapter extends ArrayAdapter<ProductToSend> {
 	private void setupItem(toShopItemHolder holder) {
 		holder.name.setText(holder.offerItem.getName());
 		holder.quantity.setText(String.valueOf(holder.offerItem.getQuantity()));
+        holder.unit.setText(holder.offerItem.getUnit());
 		holder.price.setText(String.valueOf(ResponseFromServer.round(holder.offerItem.getPrice(), 2) ));
 	}
 
 	public static class toShopItemHolder {
 		ProductToSend offerItem;
 		TextView name;
-		TextView brand;
-		TextView status;
-		TextView color;
+        TextView unit;
 		TextView price;
 		TextView quantity;
 	}

@@ -107,11 +107,12 @@ public class ResponseFromServer
                 ProductToSend p;
                 JSONObject jb2 = listShopping.getJSONObject(j);
                 String name = jb2.getString("name");
+                String unit = jb2.getString("unit");
                 String initQuantity=jb2.getString("init_quantity");
                 String price = jb2.getString("price");
                 String product_positionx = jb2.getString("product_positionx");
                 String product_positiony = jb2.getString("product_positiony");
-                p=new ProductToSend(name,Integer.parseInt(initQuantity),Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
+                p=new ProductToSend(name,Integer.parseInt(initQuantity),unit,Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
                 lit.add(p);
             }
         } catch (JSONException e) {

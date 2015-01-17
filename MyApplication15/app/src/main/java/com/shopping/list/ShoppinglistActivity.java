@@ -713,18 +713,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 10000); //Timeout Limit
             HttpPost request = new HttpPost(URL);
             HttpResponse response;
-
-            for(int i=0;i<listToSubmit.size();i++)
-            {
-                String p=listToSubmit.get(i).toString();
-                //String[] splited = p.split("\\s+");
-                //Log.i("N",splited[2]);
-                //Log.i("U",splited[1]);
-                Log.i("L",p);
-            //ProductToSend product=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
-            // ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
-            //  list.add(product);
-            }
             List<ProductToSend> list=new ArrayList<ProductToSend>();
             ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
             list.add(product);

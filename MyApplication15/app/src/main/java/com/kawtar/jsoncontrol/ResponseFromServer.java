@@ -107,39 +107,11 @@ public class ResponseFromServer
                 ProductToSend p;
                 JSONObject jb2 = listShopping.getJSONObject(j);
                 String name = jb2.getString("name");
-                String brand = jb2.getString("brand");
-                String color = jb2.getString("color");
-                String quantity = jb2.getString("quantity");
                 String initQuantity=jb2.getString("init_quantity");
                 String price = jb2.getString("price");
-                String acceptProduct=jb2.getString("accept_product");
                 String product_positionx = jb2.getString("product_positionx");
                 String product_positiony = jb2.getString("product_positiony");
-                int q=Integer.parseInt(quantity);
-                if(q!=-1)
-                {
-                    if(Integer.parseInt(initQuantity)>q)
-                    {
-
-                        String status=q+"max available";
-                        p=new ProductToSend(name,Integer.parseInt(initQuantity),Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
-
-
-                    }
-                    else
-                    {
-                        String status="Ok";
-                        p=new ProductToSend(name,Integer.parseInt(initQuantity), Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
-
-                    }
-
-                }
-                else
-                {
-                    String status="Missing";
-                    p=new ProductToSend(name,0, Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
-
-                }
+                p=new ProductToSend(name,Integer.parseInt(initQuantity),Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
                 lit.add(p);
             }
         } catch (JSONException e) {
@@ -147,53 +119,6 @@ public class ResponseFromServer
         }
         return lit;
     }
-    public static List<ProductToSend> parseJSONResultFalse(String result)
-	{
-		try
-	    {
-		  List<ProductToSend> list=new ArrayList<ProductToSend>();
-		  JSONArray jarray=new JSONArray(result);
-	      for(int i=0;i<jarray.length();i++)
-	      {
-
-	            	 JSONObject jbo=jarray.getJSONObject(i);
-			         String name = jbo.getString("name");
-			         String brand = jbo.getString("brand");
-			         String color = jbo.getString("color");
-			         String quantity = jbo.getString("quantity");
-			         String initQuantity=jbo.getString("init_quantity");
-			         String acceptProduct=jbo.getString("accept_product");
-                     ProductToSend p;
-                     int q=Integer.parseInt(quantity);
-                     if(q!=-1){
-                        if(Integer.parseInt(initQuantity)>q )
-                        {
-                            String status=q+"max available";
-                            p=new ProductToSend(name,Integer.parseInt(initQuantity), 0,0, 0,false);
-                        }
-                        else
-                        {
-                            String status="Ok";
-                            p=new ProductToSend(name,Integer.parseInt(initQuantity), 0,0, 0,false);
-                        }
-                    }
-                    else
-                    {
-                        String status="Missing";
-                        p=new ProductToSend(name,0, 0,0, 0,false);
-
-                    }
-                    list.add(p);
-	             }
-
-	      return list;
-	   }catch(Exception e)
-	   {
-		   e.printStackTrace();
-		   return null;
-	   }
-	
-	}
 
 }
 

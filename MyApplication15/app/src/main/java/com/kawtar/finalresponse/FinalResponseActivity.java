@@ -15,6 +15,7 @@ import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.ResponseFromServer;
 import com.kawtar.mainUI.MainActivity;
 import com.kawtar.mainUI.SplashActivity;
+import com.shopping.list.ShoppinglistActivity;
 
 public class FinalResponseActivity extends Activity {
 
@@ -32,9 +33,10 @@ public class FinalResponseActivity extends Activity {
         adapter = new FinalResponseAdapter(FinalResponseActivity.this, R.layout.final_response_layout, new ArrayList<ResponseFromServer>());
         itemOfferListView = (ListView) findViewById(R.id.OffersList);
         itemOfferListView.setAdapter(adapter);
-        //if (RequestActivity.getOfferFromServer() != null)
-        //{
-            List<ResponseFromServer> offer =null;// RequestActivity.getOfferFromServer();
+        String result=ShoppinglistActivity.getResultServer();
+        if (result != null)
+        {
+            List<ResponseFromServer> offer =ResponseFromServer.parseJSONResult(result);
             if (offer.size() != 0) {
                 for (int i = 0; i < offer.size(); i++) {
                     adapter.insert(offer.get(i), 0);
@@ -42,11 +44,11 @@ public class FinalResponseActivity extends Activity {
             } else {
                 createDialog("Error offer", "A problem has occured, sorry");
             }
-        //}
-        //else
-        //{
-          //  createDialog("Error offer", "A problem has occured, sorry");
-        //}
+        }
+        else
+        {
+            createDialog("Error offer", "A problem has occured, sorry");
+        }
 	}
 	public  void createDialog(final String title, String text) {
 		// Hide keyboard and show it at demand

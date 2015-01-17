@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.kawtar.myapplication.R;
+import com.kawtar.finalresponse.FinalResponseActivity;
 import com.kawtar.jsoncontrol.RequestList;
 import com.kawtar.listshopping.ProductToSend;
 import com.kawtar.mainUI.MainActivity;
@@ -89,6 +90,14 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
     private String  result;
 
     private RequestList reqlist;
+
+    //Launch intent for results
+
+    private Intent mIntent;
+
+    private static final int	QUIT= 0;
+
+    private static String response;
 
 	/**
 	 * because this activity is the "Home" of the app, but we have two different
@@ -648,6 +657,25 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
         AlertDialog alert1 = ad.create();
         alert1.show();
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1)
+        {
+            if (resultCode == QUIT)
+            {
+                mIntent = new Intent(ShoppinglistActivity.this, MainActivity.class);
+                startActivity(mIntent);
+            }
+        }
+    }
+    private void setResultServer(String res)
+    {
+        response=res;
+    }
+    public static String getResultServer()
+    {
+        return response;
+    }
     private class PostTask extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
         private int		reqStatus;
@@ -674,9 +702,10 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
                     if (reqStatus== HttpStatus.SC_OK) {
                         Log.i("What the server sends back:", result);
 
-                        if (result != null)
+                        if (result!= null)
                         {
                              Log.i("TAG",result);
+                             setResultServer(result);
                         }
                         else
                         {
@@ -700,9 +729,8 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             if (null != pDialog && pDialog.isShowing())
             {
                 pDialog.dismiss();
-                //mIntent=new Intent(ShoppinglistActivity.this,FinalResponseActivity.class);
-                //startActivity(mIntent);
-                Log.i("tr","fini");
+                mIntent=new Intent(ShoppinglistActivity.this,FinalResponseActivity.class);
+                startActivity(mIntent);
             }
             super.onPostExecute(res);
         }
@@ -713,9 +741,9 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 10000); //Timeout Limit
             HttpPost request = new HttpPost(URL);
             HttpResponse response;
-            List<ProductToSend> list=new ArrayList<ProductToSend>();
-            ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
-            list.add(product);
+            //List<ProductToSend> list=new ArrayList<ProductToSend>();
+            //ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
+            //list.add(product);
             List<String>li=new ArrayList<String>();
             List<ProductToSend>listToSubmit=new ArrayList<ProductToSend>();
             for (final ShoppinglistProductMapping mapping : shoppinglistProductMappingsToShow) {

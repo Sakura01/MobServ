@@ -757,9 +757,9 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
                 String p=li.get(i).toString();
                 Log.i("DATA_LIST",p);
                 String[] splited = p.split("\\s+");
-                Log.i("Name",splited[2]);
-                Log.i("Unit",splited[1]);
-                Log.i("Quanti",splited[0]);
+                //Log.i("Name",splited[2]);
+                //Log.i("Unit",splited[1]);
+                //Log.i("Quanti",splited[0]);
                 ProductToSend productSend=new ProductToSend(splited[2],Integer.parseInt(splited[0]),splited[1],0,0,0,false);
                 listToSubmit.add(productSend);
             }

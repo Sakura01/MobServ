@@ -112,7 +112,7 @@ public class ResponseFromServer
                 String price = jb2.getString("price");
                 String product_positionx = jb2.getString("product_positionx");
                 String product_positiony = jb2.getString("product_positiony");
-                p=new ProductToSend(name,Integer.parseInt(initQuantity),unit,Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
+                p=new ProductToSend(name,name,Integer.parseInt(initQuantity),unit,Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round(Float.parseFloat(price), 2),false);
                 lit.add(p);
             }
         } catch (JSONException e) {

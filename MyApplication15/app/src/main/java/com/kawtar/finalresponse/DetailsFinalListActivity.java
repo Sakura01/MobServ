@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
@@ -40,16 +41,19 @@ public class DetailsFinalListActivity extends Activity{
         String result= ShoppinglistActivity.getResultServer();
         if (result != null) {
             List<ResponseFromServer> offer = ResponseFromServer.parseJSONResult(result);
+            Toast.makeText(getApplicationContext(), "Details"+result, Toast.LENGTH_LONG).show();
             if (offer.size() != 0) {
                 for (int i = 0; i < offer.size(); i++) {
                     if (offer.get(i).getSuperMarket().getName().equals(supermarketName)) {
                         String superMarket = offer.get(i).getSuperMarket().getName();
-                        Toast.makeText(getApplicationContext(), "Name:" + superMarket, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Name in details:" + superMarket, Toast.LENGTH_LONG).show();
                         list = offer.get(i).getList();
+
                     }
                 }
                 for (int j = 0; j < list.size(); j++) {
                     ProductToSend product = list.get(j);
+                    Log.i("elme in Details",product.getName());
                     adapter.insert(product, 0);
                 }
             } else {

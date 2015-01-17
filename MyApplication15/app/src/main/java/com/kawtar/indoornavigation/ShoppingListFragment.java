@@ -94,39 +94,13 @@ public class ShoppingListFragment extends Fragment {
                     if(offer.get(i).getSuperMarket().getIndoorMapUrl().equals(supermarketName))
                     {
                         list=offer.get(i).getList();
+
                         break;
                     }
                 }
                 //List to sort out
-                nodes = new ArrayList<ProductToSend>();
-                links = new ArrayList<Link>();
-                for (int i = 0; i < list.size(); i++) {
+                Log.i("elements dans la liste",list.get(0).getName());
 
-                    ProductToSend location = new ProductToSend(list.get(i).getName(), list.get(i).getName(),list.get(i).getQuantity(),list.get(i).getUnit(),list.get(i).getPositionx(),list.get(i).getPositiony(),list.get(i).getPrice(),false);
-                    nodes.add(location);
-                }
-                for (int j=0; j<list.size(); j++){
-                    for(int k=0; k<list.size();k++){
-                        if(k!=j){
-                            addLane("Edge"+(j+k),j,k);
-                        }
-
-                    }
-                }
-
-                // Lets check from location Loc_1 to Loc_10
-                Graph graph = new Graph(nodes, links);
-                Dijkstra dijkstra = new Dijkstra(graph);
-                dijkstra.execute(nodes.get(0));
-                LinkedList<ProductToSend> path = dijkstra.getPath(nodes.get(10));
-
-
-                List<ProductToSend>listSorted=new ArrayList<ProductToSend>();
-                for (ProductToSend vertex : path) {
-                    System.out.println(vertex);
-                    listSorted.add(vertex);
-
-                }
                 //create an ArrayAdaptar from the String Array
                 ArrayAdapter<ProductToSend> dataAdapter = new ArrayAdapter<ProductToSend>(getActivity(),
                         R.layout.shopping_list_fragment, list);//list

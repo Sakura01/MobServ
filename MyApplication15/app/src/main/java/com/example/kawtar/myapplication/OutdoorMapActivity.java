@@ -74,9 +74,13 @@ public class OutdoorMapActivity extends FragmentActivity implements LocationList
                 for (int i = 0; i < offer.size(); i++) {
                     if (offer.get(i).getSuperMarket().getName().equals(supermarketName))
                     {
+                        Log.i("Mickey","mimi");
                         superMarketLatitude=offer.get(i).getSuperMarket().getPositionX();
+                        Log.i("Mickey",""+superMarketLatitude);
                         superMarketLongitude=offer.get(i).getSuperMarket().getPositionY();
+                        Log.i("Mickey",""+superMarketLongitude);
                         superMarketMap=offer.get(i).getSuperMarket().getIndoorMapUrl();
+                        Log.i("Mickey",superMarketMap);
                         Log.d("SuperMarket Map from outdoor Activity",superMarketMap);
                         break;
 

@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,9 @@ public class MapFragment extends Fragment
         {
             super(context);
             marker = BitmapFactory.decodeResource(getResources(), R.drawable.mark_item);
-            map= PrepareIndoorActivity.getIndoorMap();
-                    //BitmapFactory.decodeResource(getResources(), R.drawable.casino);
+            //map= PrepareIndoorActivity.getIndoorMap();
+
+                    map=BitmapFactory.decodeResource(getResources(), R.drawable.mark_item);
         }
     }
 

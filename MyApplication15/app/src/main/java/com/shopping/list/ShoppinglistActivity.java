@@ -519,7 +519,7 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 	 */
 	private void refreshLayout() {
 		this.setViewType();
-
+        //sort Alpha
 		if (this.viewType == ConfigurationConstants.ALPHABETICALLY_VIEW) {
 
 			this.setContentView(R.layout.overview_alphabet);
@@ -528,7 +528,9 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 			// update the process
 			this.setProcessTextInAlphabeticallyView();
 
-		} else if (this.viewType == ConfigurationConstants.STORE_VIEW) {
+		}
+        //sort by Markets
+        else if (this.viewType == ConfigurationConstants.STORE_VIEW) {
 
 			this.setContentView(R.layout.overview_store);
 			this.actionsToPerformInStoreViewType();
@@ -552,12 +554,13 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 		final int colorToShow = ProcessColorHelper.getColorForProcess(checkedMappingsCount,
 				allMappingsCount);
-
+        //List not in details
 		this.labelProcessAlphabetically = (TextView) this
 				.findViewById(R.id.labelAlphabeticallyOverviewStatus);
 		this.labelProcessAlphabetically.setText("( " + checkedMappingsCount + " / "
 				+ allMappingsCount + " )");
 		this.labelProcessAlphabetically.setTextColor(colorToShow);
+
 	}
 
 	/**
@@ -716,6 +719,8 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             List<ProductToSend> list=new ArrayList<ProductToSend>();
             ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
             list.add(product);
+            List<String>li=new ArrayList<String>();
+
             //for(int i=0;i<listToSubmit.size();i++)
             //{
                 //String p=listToSubmit.get(i).toString();

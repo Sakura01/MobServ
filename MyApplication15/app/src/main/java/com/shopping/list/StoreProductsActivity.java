@@ -1,5 +1,6 @@
 package com.shopping.list;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.example.kawtar.myapplication.R;
 import com.shopping.list.adapter.ShoppinglistProductMappingAdapter;
@@ -49,6 +50,7 @@ public class StoreProductsActivity extends AbstractShoppinglistActivity {
 
 	private List<ShoppinglistProductMapping> shoppinglistProductMappings;
 
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -80,7 +82,6 @@ public class StoreProductsActivity extends AbstractShoppinglistActivity {
 		this.listShoppinglistProductMapping = (ListView) this
 				.findViewById(R.id.listShoppinglistProductMappingsStore);
 		this.listShoppinglistProductMapping.setAdapter(this.shoppinglistProductMappingAdapter);
-
 		// handle "normal" clicks on shoppinglistItems -> mark them as checked
 		this.listShoppinglistProductMapping.setOnItemClickListener(new OnItemClickListener() {
 
@@ -97,6 +98,7 @@ public class StoreProductsActivity extends AbstractShoppinglistActivity {
 									.indexOf(clickedMapping)).setChecked(GlobalValues.YES);
 					StoreProductsActivity.this.datasource
 							.markShoppinglistProductMappingAsChecked(clickedMapping.getId());
+
 				} else if (clickedMapping.isChecked() == GlobalValues.YES) {
 
 					StoreProductsActivity.this.shoppinglistProductMappings.get(

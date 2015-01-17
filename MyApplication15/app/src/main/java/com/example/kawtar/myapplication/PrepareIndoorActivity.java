@@ -15,6 +15,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
+
 import com.kawtar.indoornavigation.IndoorMapActivity;
 import com.kawtar.mainUI.SplashActivity;
 import com.kawtar.networkcontrol.ReachabilityTest;
@@ -95,6 +97,10 @@ public class PrepareIndoorActivity extends Activity {
     }
     public static Bitmap getIndoorMap()
     {
+        if(indoorMap==null)
+        {
+            Log.i("Map nulle", "merde");
+        }
         return indoorMap;
     }
     public void onBackPressed() {

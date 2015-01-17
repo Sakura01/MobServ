@@ -41,16 +41,15 @@ public class MapFragment extends Fragment
     private MapLayout layout;
     private Bitmap tempBitmap;
     private Paint paint;
-    private         ImageLoader imageLoader = null;
     private class MapLayout extends RelativeLayout
     {
         private MapLayout(Context context)
         {
             super(context);
             marker = BitmapFactory.decodeResource(getResources(), R.drawable.mark_item);
-            //map= PrepareIndoorActivity.getIndoorMap();
+            map= PrepareIndoorActivity.getIndoorMap();
 
-                    map=BitmapFactory.decodeResource(getResources(), R.drawable.mark_item);
+            //map=BitmapFactory.decodeResource(getResources(), R.drawable.mark_item);
         }
     }
 

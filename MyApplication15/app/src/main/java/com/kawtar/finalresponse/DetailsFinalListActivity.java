@@ -25,7 +25,6 @@ public class DetailsFinalListActivity extends Activity{
 	
 	private DetailsFinalListAdapter adapter;
 	private ListView itemOfferListView;
-	private Button backButton;
 	private List<ProductToSend> list;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

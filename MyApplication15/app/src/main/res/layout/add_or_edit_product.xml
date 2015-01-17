@@ -55,20 +55,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </TableRow>
-
-        <TableRow>
-
-            <TextView
-                style="@style/View.Text.Label"
-                android:text="@string/label_add_new_product_store" >
-            </TextView>
-
-            <Spinner
-                android:id="@+id/spinnerStoreAddProduct"
-                style="@style/View.Spinner" >
-            </Spinner>
-        </TableRow>
-
         <TableRow android:gravity="center" >
 
             <Button

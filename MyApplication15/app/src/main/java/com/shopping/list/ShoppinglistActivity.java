@@ -491,11 +491,11 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 			break;
 
 		// OptionsMenu - Actionbar
-		case R.id.actionbarOptions:
+		//case R.id.actionbarOptions:
 			// switch to the UserConfigurationActivity
-			final Intent intentUserConfiguration = new Intent(this, UserConfigurationActivity.class);
-			this.startActivityForResult(intentUserConfiguration, 0);
-			break;
+			//final Intent intentUserConfiguration = new Intent(this, UserConfigurationActivity.class);
+			//this.startActivityForResult(intentUserConfiguration, 0);
+			//break;
 
 		default:
 			break;
@@ -526,12 +526,12 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 		}
         //sort by Markets
-        else if (this.viewType == ConfigurationConstants.STORE_VIEW) {
+  //      else if (this.viewType == ConfigurationConstants.STORE_VIEW) {
 
-			this.setContentView(R.layout.overview_store);
-			this.actionsToPerformInStoreViewType();
+//			this.setContentView(R.layout.overview_store);
+//			this.actionsToPerformInStoreViewType();
 
-		}
+		//}
 	}
 
 	/**
@@ -564,8 +564,9 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 	 */
 	private void setViewType() {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		int listTypePref = Integer.parseInt(sharedPref.getString(UserConfigurationActivity.KEY_PREF_LIST_TYPE, UserConfigurationActivity.KEY_PREF_LIST_TYPE_DEFAULT));
-		this.viewType = listTypePref;
+		//int listTypePref = Integer.parseInt(sharedPref.getString(UserConfigurationActivity.KEY_PREF_LIST_TYPE, UserConfigurationActivity.KEY_PREF_LIST_TYPE_DEFAULT));
+		//this.viewType = listTypePref;
+        this.viewType =ConfigurationConstants.ALPHABETICALLY_VIEW;
 	}
 
 	/**
@@ -716,9 +717,10 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
             list.add(product);
             List<String>li=new ArrayList<String>();
+            List<ProductToSend>listToSubmit=new ArrayList<ProductToSend>();
             for (final ShoppinglistProductMapping mapping : shoppinglistProductMappingsToShow) {
                 if (mapping.isChecked() == GlobalValues.YES) {
-                    Log.i("DATA",mapping.toString());
+                    Log.i("DATA", mapping.toString());
                     li.add(mapping.toString());
                 }
             }
@@ -726,17 +728,22 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
             {
                 String p=li.get(i).toString();
                 Log.i("DATA_LIST",p);
-                //String[] splited = p.split("\\s+");
-                //ProductToSend product=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
-               // ProductToSend product=new ProductToSend("milk",1,0,0,0,false);
-              //  list.add(product);
+                String[] splited = p.split("\\s+");
+                //Log.i("Name",splited[2]);
+                //Log.i("Unit",splited[1]);
+               //Log.i("Quanti",splited[0]);
+                ProductToSend productSend=new ProductToSend(splited[2],Integer.parseInt(splited[0]),0,0,0,false);
+                listToSubmit.add(productSend);
+
             }
-            reqlist=new RequestList(list, MainActivity.getDistanceRange(), MainActivity.getBudget(),MainActivity.getUserLatitude(),MainActivity.getUserLongitude());
+            //ProductToSend productSend=new ProductToSend("milk",1,0,0,0,false);
+
+            reqlist=new RequestList(listToSubmit, MainActivity.getDistanceRange(), MainActivity.getBudget(),MainActivity.getUserLatitude(),MainActivity.getUserLongitude());
             Log.i("DistR", ""+MainActivity.getDistanceRange());
             Log.i("Budg", ""+MainActivity.getBudget());
             Log.i("Lat", ""+MainActivity.getUserLatitude());
             Log.i("Long", ""+MainActivity.getUserLongitude());
-            Log.i("product", ""+list.get(0).getName());
+            Log.i("product", ""+listToSubmit.get(0).getName());
 
             try {
 

@@ -44,11 +44,5 @@
         android:showAsAction="never"
         android:title="@string/actionbar_share_list">
     </item>
-    <item
-        android:id="@+id/actionbarOptions"
-        android:orderInCategory="35"
-        android:showAsAction="never"
-        android:title="@string/actionbar_options">
-    </item>
 
 </menu>

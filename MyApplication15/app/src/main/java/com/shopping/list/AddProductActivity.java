@@ -62,9 +62,9 @@ public class AddProductActivity extends AbstractShoppinglistActivity {
 		final ArrayAdapter<Unit> spinnerUnitAdapter = new UnitAdapter(this, units);
 		this.spinnerUnits.setAdapter(spinnerUnitAdapter);
 
-		this.spinnerStores = (Spinner) this.findViewById(R.id.spinnerStoreAddProduct);
-		final ArrayAdapter<Store> spinnerStoreAdapter = new StoreAdapter(this, stores);
-		this.spinnerStores.setAdapter(spinnerStoreAdapter);
+		//this.spinnerStores = (Spinner) this.findViewById(R.id.spinnerStoreAddProduct);
+		//final ArrayAdapter<Store> spinnerStoreAdapter = new StoreAdapter(this, stores);
+		//this.spinnerStores.setAdapter(spinnerStoreAdapter);
 
 		this.editTextProductName = (AutoCompleteTextView) this
 				.findViewById(R.id.editTextProductNameAutocomplete);

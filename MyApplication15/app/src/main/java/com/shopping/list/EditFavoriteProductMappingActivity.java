@@ -61,9 +61,9 @@ public class EditFavoriteProductMappingActivity extends AbstractShoppinglistActi
 		final ArrayAdapter<Unit> spinnerUnitAdapter = new UnitAdapter(this, units);
 		this.spinnerUnits.setAdapter(spinnerUnitAdapter);
 
-		this.spinnerStores = (Spinner) this.findViewById(R.id.spinnerStoreAddProduct);
-		final ArrayAdapter<Store> spinnerStoreAdapter = new StoreAdapter(this, stores);
-		this.spinnerStores.setAdapter(spinnerStoreAdapter);
+		//this.spinnerStores = (Spinner) this.findViewById(R.id.spinnerStoreAddProduct);
+		//final ArrayAdapter<Store> spinnerStoreAdapter = new StoreAdapter(this, stores);
+		//this.spinnerStores.setAdapter(spinnerStoreAdapter);
 
 		this.editTextProductName = (EditText) this
 				.findViewById(R.id.editTextProductNameAutocomplete);
@@ -100,11 +100,11 @@ public class EditFavoriteProductMappingActivity extends AbstractShoppinglistActi
 		final int clickedMappingStoreId = this.getIntent()
 				.getIntExtra(DBConstants.COL_STORE_ID, -1);
 
-		for (final Store store : stores) {
-			if (store.getId() == clickedMappingStoreId) {
-				this.spinnerStores.setSelection(spinnerStoreAdapter.getPosition(store));
-			}
-		}
+		//for (final Store store : stores) {
+		//	if (store.getId() == clickedMappingStoreId) {
+		//		this.spinnerStores.setSelection(spinnerStoreAdapter.getPosition(store));
+		//	}
+		//}
 
 		// FavoriteProductMappingId
 		final int clickedMappingId = this.getIntent().getIntExtra(

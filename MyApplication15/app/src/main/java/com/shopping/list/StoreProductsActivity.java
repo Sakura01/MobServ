@@ -273,11 +273,11 @@ public class StoreProductsActivity extends AbstractShoppinglistActivity {
 			break;
 
 		// OptionsMenu - Actionbar
-		case R.id.actionbarOptions:
+		//case R.id.actionbarOptions:
 			// switch to the UserConfigurationActivity
-			final Intent intentUserConfiguration = new Intent(this, UserConfigurationActivity.class);
-			this.startActivityForResult(intentUserConfiguration, 0);
-			break;
+			//final Intent intentUserConfiguration = new Intent(this, UserConfigurationActivity.class);
+			//this.startActivityForResult(intentUserConfiguration, 0);
+			//break;
 
 		default:
 			break;

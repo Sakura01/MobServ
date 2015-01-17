@@ -28,6 +28,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.kawtar.finalresponse.FinalResponseAdapter;
 import com.kawtar.jsoncontrol.ResponseFromServer;
+import com.kawtar.listshopping.ProductToSend;
+import com.shopping.list.ShoppinglistActivity;
 
 import android.location.Criteria;
 import android.content.Context;
@@ -62,25 +64,30 @@ public class OutdoorMapActivity extends FragmentActivity implements LocationList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.outdoor_map_activity_layout);
         String supermarketName=FinalResponseAdapter.mIntentO.getStringExtra("SuperMarketName");
-        //List<ResponseFromServer> offer=RequestActivity.getOfferFromServer();
-        //if(offer.size()!=0)
-        //{
-          //  for(int i=0;i<offer.size();i++)
-           // {
-             //   offer.get(i).getSuperMarket().getName();
-               // if(offer.get(i).getSuperMarket().getName().equals(supermarketName))
-                //{
-                  //  superMarketLatitude=offer.get(i).getSuperMarket().getPositionX();
-                    //superMarketLongitude=offer.get(i).getSuperMarket().getPositionY();
-                    //superMarketMap=offer.get(i).getSuperMarket().getIndoorMapUrl();
-                    //Log.d("SuperMarket Map from outdoor Activity",superMarketMap);
-                //}
-           // }
-        //}
-        //else
-        //{
-          //  createDialog("Error offer", "A problem has occured, sorry");
-        //}
+        String result= ShoppinglistActivity.getResultServer();
+        if (result != null) {
+            List<ResponseFromServer> offer = ResponseFromServer.parseJSONResult(result);
+            Toast.makeText(getApplicationContext(), "Details"+result, Toast.LENGTH_LONG).show();
+            if (offer.size() != 0) {
+                for (int i = 0; i < offer.size(); i++) {
+                    if (offer.get(i).getSuperMarket().getName().equals(supermarketName))
+                    {
+                        superMarketLatitude=offer.get(i).getSuperMarket().getPositionX();
+                        superMarketLongitude=offer.get(i).getSuperMarket().getPositionY();
+                        superMarketMap=offer.get(i).getSuperMarket().getIndoorMapUrl();
+                        Log.d("SuperMarket Map from outdoor Activity",superMarketMap);
+                        break;
+
+                    }
+                }
+            } else {
+                createDialog("Error offer", "A problem has occured, sorry");
+            }
+        }
+        else
+        {
+            createDialog("Error offer", "A problem has occured, sorry");
+        }
         // Getting Google Play availability status
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 

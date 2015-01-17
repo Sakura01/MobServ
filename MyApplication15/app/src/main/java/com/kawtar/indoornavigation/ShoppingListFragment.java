@@ -127,7 +127,7 @@ public class ShoppingListFragment extends Fragment {
                 }
                 //create an ArrayAdaptar from the String Array
                 ArrayAdapter<ProductToSend> dataAdapter = new ArrayAdapter<ProductToSend>(getActivity(),
-                        R.layout.shopping_list_fragment, listSorted);//list
+                        R.layout.shopping_list_fragment, list);//list
                 final ListView listView = (ListView) getView().findViewById(R.id.listofShoppingItems);
                 // Assign adapter to ListView
                 listView.setAdapter(dataAdapter);

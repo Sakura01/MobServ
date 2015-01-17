@@ -66,7 +66,6 @@ public class RequestList {
 		    	jsonResponse.put("budget", String.valueOf(getBudget()));
 		    	jsonResponse.put("latitudeU", String.valueOf(getLatitude()));
 		    	jsonResponse.put("longitudeU", String.valueOf(getLongitude()));
-		    	jsonResponse.put("accept", String.valueOf(getAcceptFlag()));
         	  for(int i=0;i<getList().size();i++)
               {
         		  JSONObject jsonObject= new JSONObject();

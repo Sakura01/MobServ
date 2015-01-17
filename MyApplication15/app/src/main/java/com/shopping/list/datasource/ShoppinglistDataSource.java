@@ -45,18 +45,16 @@ public class ShoppinglistDataSource {
 	public void addAllToHistory() {
 		this.isDbLockedByThread();
 
-		final String replaceUmlautsHistoryPart1 = "replace(replace(replace(replace(replace(replace(replace(";
-		final String replaceUmlautsHistoryPart2 = ",'&auml;','�'),'&Auml;','�'),'&ouml;','�'),'&Ouml;','�'),'&uuml;','�'),'&Uuml;','�'),'&szlig;','�')";
 
 		final String sqlInsertHistory = "INSERT INTO " + DBConstants.TAB_HISTORY_NAME + " ("
 				+ DBConstants.COL_HISTORY_SHOPPINGLIST_ID + ", " + DBConstants.COL_HISTORY_STORE
 				+ ", " + DBConstants.COL_HISTORY_PRODUCT + ", " + DBConstants.COL_HISTORY_UNIT
 				+ ", " + DBConstants.COL_HISTORY_QUANTITY + ") SELECT "
-				+ DBConstants.COL_SHOPPINGLIST_ID + ", " + replaceUmlautsHistoryPart1
-				+ DBConstants.COL_STORE_NAME + replaceUmlautsHistoryPart2 + ", "
-				+ replaceUmlautsHistoryPart1 + DBConstants.COL_PRODUCT_NAME
-				+ replaceUmlautsHistoryPart2 + ", " + replaceUmlautsHistoryPart1
-				+ DBConstants.COL_UNIT_NAME + replaceUmlautsHistoryPart2 + ", "
+				+ DBConstants.COL_SHOPPINGLIST_ID + ", "
+				+ DBConstants.COL_STORE_NAME +  ", "
+				 + DBConstants.COL_PRODUCT_NAME
+				 + ", "
+				+ DBConstants.COL_UNIT_NAME +  ", "
 				+ DBConstants.COL_SHOPPINGLIST_PRODUCT_MAPPING_QUANTITY + " FROM "
 				+ DBConstants.TAB_SHOPPINGLIST_PRODUCT_MAPPING_NAME + " INNER JOIN "
 				+ DBConstants.TAB_SHOPPINGLIST_NAME + " on "

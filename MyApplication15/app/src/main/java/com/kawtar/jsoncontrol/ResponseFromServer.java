@@ -127,14 +127,14 @@ public class ResponseFromServer
                     {
 
                         String status=q+"max available";
-                        p=new Product(name,brand,color,Integer.parseInt(initQuantity),Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),status,Boolean.valueOf(acceptProduct),false);
+                        p=new Product(name,Integer.parseInt(initQuantity),Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),false);
 
 
                     }
                     else
                     {
                         String status="Ok";
-                        p=new Product(name,brand,color,Integer.parseInt(initQuantity), Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),status,Boolean.valueOf(acceptProduct),false);
+                        p=new Product(name,Integer.parseInt(initQuantity), Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),false);
 
                     }
 
@@ -142,7 +142,7 @@ public class ResponseFromServer
                 else
                 {
                     String status="Missing";
-                    p=new Product(name,brand,color,0, Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),status,Boolean.valueOf(acceptProduct),false);
+                    p=new Product(name,0, Float.parseFloat(product_positionx),Float.parseFloat(product_positiony),round( Float.parseFloat(price), 2),false);
 
                 }
                 lit.add(p);
@@ -174,18 +174,18 @@ public class ResponseFromServer
                         if(Integer.parseInt(initQuantity)>q )
                         {
                             String status=q+"max available";
-                            p=new Product(name,brand,color,Integer.parseInt(initQuantity), 0,0, 0,status,Boolean.valueOf(acceptProduct),false);
+                            p=new Product(name,Integer.parseInt(initQuantity), 0,0, 0,false);
                         }
                         else
                         {
                             String status="Ok";
-                            p=new Product(name,brand,color,Integer.parseInt(initQuantity), 0,0, 0,status,Boolean.valueOf(acceptProduct),false);
+                            p=new Product(name,Integer.parseInt(initQuantity), 0,0, 0,false);
                         }
                     }
                     else
                     {
                         String status="Missing";
-                        p=new Product(name,brand,color,0, 0,0, 0,status,Boolean.valueOf(acceptProduct),false);
+                        p=new Product(name,0, 0,0, 0,false);
 
                     }
                     list.add(p);

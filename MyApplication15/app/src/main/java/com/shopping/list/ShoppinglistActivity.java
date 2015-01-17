@@ -1,9 +1,13 @@
 package com.shopping.list;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import com.example.kawtar.myapplication.R;
+
 import com.shopping.list.adapter.ShoppinglistProductMappingAdapter;
 import com.shopping.list.adapter.StoreAdapter;
+
 import com.shopping.list.bean.ShoppinglistProductMapping;
 import com.shopping.list.bean.Store;
 import com.shopping.list.constant.ConfigurationConstants;
@@ -13,11 +17,13 @@ import com.shopping.list.datasource.ShoppinglistDataSource;
 import com.shopping.list.helper.ProcessColorHelper;
 
 import android.app.AlertDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -32,6 +38,8 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
@@ -61,6 +69,9 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 	private int viewType;
 
+    int i=0;
+
+    List<ShoppinglistProductMapping> listToSubmit=new ArrayList<ShoppinglistProductMapping>();
 	/**
 	 * because this activity is the "Home" of the app, but we have two different
 	 * viewTypes, here are the actions to perform when the viewtype =
@@ -78,18 +89,23 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 		// show historybutton?
 		this.setVisibilityOfHistoryButton();
-
 		this.listAlphabetically = (ListView) this
 				.findViewById(R.id.listShoppinglistProductMappingsAlphabetically);
 		this.listAlphabetically.setAdapter(this.shoppinglistMappingAdapter);
 		//handle clicks on send list to server
 			this.buttonSubmitList = (Button) this
 					.findViewById(R.id.buttonSubmitList);
-			this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
-				public void onClick(final View v) {
-					
-				}
-			});
+        listToSubmit=ShoppinglistProductMappingAdapter.get();
+
+        this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                for (int i = 0; i < listToSubmit.size(); i++)
+                {
+                    Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(getApplicationContext(), "M1", Toast.LENGTH_SHORT).show();
+            }
+        });
 		// handle clicks on addToHistory button
 		this.buttonAddToHistoryAlphabeticallyView = (Button) this
 				.findViewById(R.id.buttonAddToHistoryAlphabetOverview);
@@ -216,8 +232,8 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 					ShoppinglistActivity.this.shoppinglistProductMappingsToShow.get(
 							ShoppinglistActivity.this.shoppinglistProductMappingsToShow
 									.indexOf(clickedMapping)).setChecked(GlobalValues.YES);
-					ShoppinglistActivity.this.datasource
-							.markShoppinglistProductMappingAsChecked(clickedMapping.getId());
+					ShoppinglistActivity.this.datasource.markShoppinglistProductMappingAsChecked(clickedMapping.getId());
+
 				} else if (clickedMapping.isChecked() == GlobalValues.YES) {
 
 					ShoppinglistActivity.this.shoppinglistProductMappingsToShow.get(
@@ -252,7 +268,6 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 
 		this.listStore = (ListView) this.findViewById(R.id.listViewStore);
 		this.listStore.setAdapter(this.storeListAdapter);
-
 		// show historybutton?
 		this.setVisibilityOfHistoryButton();
 
@@ -262,11 +277,16 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		//handle clicks on send list to server
 		this.buttonSubmitList = (Button) this
 				.findViewById(R.id.buttonSubmitList);
-		this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
-			public void onClick(final View v) {
-				
-			}
-		});
+        //listToSubmit=ShoppinglistProductMappingAdapter.get();
+        this.buttonSubmitList.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+               for(int i=0;i<listToSubmit.size();i++)
+               {
+                   Toast.makeText(getApplicationContext(), listToSubmit.get(i).toString(), Toast.LENGTH_SHORT).show();
+               }
+               //Toast.makeText(getApplicationContext(), "M2", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 		this.buttonAddToHistoryStoreView.setOnClickListener(new View.OnClickListener() {
 
@@ -545,8 +565,8 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		int allMappingsCount = 0;
 		int checkedMappingsCount = 0;
 		this.setViewType();
-		this.buttonSubmitList = (Button) this
-				.findViewById(R.id.buttonSubmitList);
+        this.buttonSubmitList= (Button) this
+                .findViewById(R.id.buttonSubmitList);
 		if (this.viewType == ConfigurationConstants.STORE_VIEW) {
 			for (final Store store : this.storesToShowInOverview) {
 				allMappingsCount = allMappingsCount + store.getCountProducts();
@@ -556,10 +576,12 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 			this.buttonAddToHistoryStoreView = (Button) this
 					.findViewById(R.id.buttonAddToHistoryStoreOverview);
 
+
 			if ((allMappingsCount > 0) && (checkedMappingsCount == allMappingsCount)) 
 			{
 				this.buttonAddToHistoryStoreView.setVisibility(View.VISIBLE);
 				this.buttonSubmitList.setVisibility(View.VISIBLE);
+
 			} 
 			else {
 				this.buttonAddToHistoryStoreView.setVisibility(View.INVISIBLE);
@@ -589,4 +611,5 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
 		}
 
 	}
+
 }

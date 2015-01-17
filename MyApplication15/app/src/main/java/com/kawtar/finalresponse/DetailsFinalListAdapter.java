@@ -51,10 +51,7 @@ public class DetailsFinalListAdapter extends ArrayAdapter<Product> {
 	}
 
 	private void setupItem(toShopItemHolder holder) {
-		holder.status.setText(String.valueOf(holder.offerItem.getStatus()));
-		holder.brand.setText(String.valueOf(holder.offerItem.getBrand()));
 		holder.name.setText(holder.offerItem.getName());
-		holder.color.setText(String.valueOf(holder.offerItem.getColor()));
 		holder.quantity.setText(String.valueOf(holder.offerItem.getQuantity()));
 		holder.price.setText(String.valueOf(ResponseFromServer.round(holder.offerItem.getPrice(), 2) ));
 	}

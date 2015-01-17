@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.kawtar.myapplication.OutdoorMapActivity;
 import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.ResponseFromServer;
-import com.kawtar.listshopping.AddNewItemActivity;
 import com.kawtar.listshopping.Product;
 
 

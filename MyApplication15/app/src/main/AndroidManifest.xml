@@ -56,14 +56,12 @@
 
         </activity>
         <activity android:label="@string/title_indoor_map_activity" android:name="com.kawtar.indoornavigation.IndoorMapActivity" android:screenOrientation="landscape" > </activity>
-        <activity android:label="@string/title_activity_shoppinglist" android:name="com.kawtar.listshopping.AddNewItemActivity" android:screenOrientation="landscape"   > </activity>
         <activity android:label="@string/title_activity_request" android:name="com.kawtar.requestmarket.RequestActivity" android:screenOrientation="landscape" > </activity>
         <activity android:label="@string/title_activity_main" android:name="com.kawtar.mainUI.MainActivity" android:screenOrientation="landscape"  > </activity>
         <activity android:label="@string/title_activity_finalresponse" android:name="com.kawtar.finalresponse.FinalResponseActivity" android:screenOrientation="landscape"  > </activity>
         <activity android:label="@string/title_activity_maps" android:name=".OutdoorMapActivity" android:screenOrientation="landscape"  > </activity>
         <activity android:label="@string/title_activity_prepare_indoor_map" android:name=".PrepareIndoorActivity" android:screenOrientation="landscape"  > </activity>
         <activity android:label="@string/title_activity_details_list" android:name="com.kawtar.finalresponse.DetailsFinalListActivity" android:screenOrientation="landscape" > </activity>
-        <activity android:label="@string/title_activity_voice_recognition_list" android:name="com.kawtar.listshopping.VoiceRecognitionFillListActivity" android:screenOrientation="landscape" > </activity>
 
         <!-- WIDGET PART -->
         <receiver android:name="com.shopping.list.widget.ShoppinglistWidgetProvider" >

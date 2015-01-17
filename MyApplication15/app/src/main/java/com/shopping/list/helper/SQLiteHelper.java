@@ -112,20 +112,20 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 				+ ConfigurationConstants.STORE_VIEW + ");");
 
 		// Units
-		// Liter
+		// l
 		db.execSQL("INSERT INTO " + DBConstants.TAB_UNIT_NAME + " (" + DBConstants.COL_UNIT_NAME
 				+ ") VALUES ('" + resources.getString(R.string.sqlstatement_liter) + "');");
-		// Gramm
+		// g
 		db.execSQL("INSERT INTO " + DBConstants.TAB_UNIT_NAME + " (" + DBConstants.COL_UNIT_NAME
 				+ ") VALUES ('" + resources.getString(R.string.sqlstatement_gram) + "');");
-		// Kilo
+		// Kg
 		db.execSQL("INSERT INTO " + DBConstants.TAB_UNIT_NAME + " (" + DBConstants.COL_UNIT_NAME
 				+ ") VALUES ('" + resources.getString(R.string.sqlstatement_kilogram) + "');");
-		// Paket(e)
+		// lot
 		db.execSQL("INSERT INTO " + DBConstants.TAB_UNIT_NAME + " (" + DBConstants.COL_UNIT_NAME
 				+ ") VALUES ('" + resources.getString(R.string.sqlstatement_packets) + "');");
 		// Stores
-		// keine Angabe - Standard Markt
+
 		db.execSQL("INSERT INTO " + DBConstants.TAB_STORE_NAME + " (" + DBConstants.COL_STORE_NAME
 				+ ") VALUES ('" + resources.getString(R.string.sqlstatement_not_specified) + "');");
 

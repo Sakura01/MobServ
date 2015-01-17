@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.kawtar.myapplication.OutdoorMapActivity;
 import com.kawtar.indoornavigation.ShoppingListFragment.OnShoppingItemSelectedListener;
-import com.kawtar.listshopping.AddNewItemActivity;
 import com.kawtar.listshopping.Product;
 import com.kawtar.mainUI.MainActivity;
 import com.kawtar.mainUI.SplashActivity;

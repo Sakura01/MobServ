@@ -118,10 +118,6 @@ public class EditProductActivity extends AbstractShoppinglistActivity {
 				if (EditProductActivity.super
 						.setErrorOnEmptyEditTexts(EditProductActivity.this.editTextIds)) {
 
-					// pr�fen, ob Produkt in Benutzung, wenn nicht updaten,
-					// sonst
-					// neu anlegen
-					//
 					final String quantity = EditProductActivity.this.editTextQuantity.getText()
 							.toString();
 					final Unit selectedUnit = (Unit) EditProductActivity.this.spinnerUnits

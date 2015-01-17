@@ -62,7 +62,6 @@ public class ShowHistoryShoppinglist extends AbstractShoppinglistActivity {
 
 		this.listViewHistory = (ListView) this.findViewById(R.id.listViewHistoryShoppinglist);
 		this.listViewHistory.setAdapter(this.historyShoppinglistAdapter);
-
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.shopping.list.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.kawtar.myapplication.R;
@@ -16,9 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ShoppinglistProductMappingAdapter extends ArrayAdapter<ShoppinglistProductMapping> {
-
+    private static List<ShoppinglistProductMapping>list;
 	private final Context context;
-
 	private final List<ShoppinglistProductMapping> values;
 
 	public ShoppinglistProductMappingAdapter(final Context context,
@@ -26,6 +26,7 @@ public class ShoppinglistProductMappingAdapter extends ArrayAdapter<Shoppinglist
 		super(context, R.layout.list_row, values);
 		this.context = context;
 		this.values = values;
+        this.list=new ArrayList<ShoppinglistProductMapping>();
 	}
 
 	@SuppressLint("ViewHolder")
@@ -41,7 +42,6 @@ public class ShoppinglistProductMappingAdapter extends ArrayAdapter<Shoppinglist
 		// convertView, parent);
 		final TextView textView = (TextView) rowView.findViewById(R.id.rowText);
 		final ImageView checkBox = (ImageView) rowView.findViewById(R.id.rowCheckBox);
-
 		final ShoppinglistProductMapping shoppinglistProductMappingToShow = this.values
 				.get(position);
 
@@ -51,12 +51,18 @@ public class ShoppinglistProductMappingAdapter extends ArrayAdapter<Shoppinglist
 			// paint the strikethrough
 			checkBox.setImageResource(R.drawable.checked_box);
 			textView.setTextColor(textView.getResources().getColor(R.color.greyed_text_color));
-
+            list.add(shoppinglistProductMappingToShow);
 		} else if (shoppinglistProductMappingToShow.isChecked() == GlobalValues.NO) {
 			// remove the strikethrough
 			checkBox.setImageResource(R.drawable.check_box);
+            list.remove(shoppinglistProductMappingToShow);
+
 		}
 
 		return rowView;
 	}
+    public static List<ShoppinglistProductMapping> get()
+    {
+        return list;
+    }
 }

@@ -107,7 +107,6 @@ public class StoreProductsActivity extends AbstractShoppinglistActivity {
 				}
 
 				StoreProductsActivity.this.shoppinglistProductMappingAdapter.notifyDataSetChanged();
-
 				// update the process
 				StoreProductsActivity.this.setProcessTextInStoreView();
 			}

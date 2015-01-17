@@ -19,7 +19,6 @@ import com.example.kawtar.myapplication.R;
 import com.kawtar.finalresponse.FinalResponseActivity;
 import com.kawtar.jsoncontrol.RequestList;
 import com.kawtar.jsoncontrol.ResponseFromServer;
-import com.kawtar.listshopping.AddNewItemActivity;
 import com.kawtar.listshopping.Product;
 import com.kawtar.mainUI.MainActivity;
 import com.kawtar.mainUI.SplashActivity;
@@ -117,17 +116,17 @@ public class RequestActivity extends Activity {
 		Product itemToRemove = (Product)v.getTag();
 		adapter.remove(itemToRemove);
 		List<Product> list=new ArrayList<Product>();
-		list=AddNewItemActivity.getShoppingList();
-		list.remove(itemToRemove);
-		itemToRemove.setAccept(false);
-		if(list.size()==0)
-		{
-			createDialog("Warning", "Your list is empty dude");
-		}
-		else
-		{
-			AddNewItemActivity.setListRequest(list);
-		}
+		//list=AddNewItemActivity.getShoppingList();
+		//list.remove(itemToRemove);
+		//itemToRemove.setAccept(false);
+		//if(list.size()==0)
+		//{
+		//	createDialog("Warning", "Your list is empty dude");
+		//}
+		//else
+		//{
+		//	AddNewItemActivity.setListRequest(list);
+		//}
 	}
 
 	private void setupListViewAdapter() {
@@ -223,7 +222,7 @@ public class RequestActivity extends Activity {
                                     {
                                         for(int i=0;i<off.get(j).getList().size();i++)
                                         {
-                                            Log.i("Reçue",off.get(j).getList().get(i).getBrand()+"|"+off.get(j).getList().get(i).getName());
+                                            //Log.i("Reçue",off.get(j).getList().get(i).getBrand()+"|"+off.get(j).getList().get(i).getName());
                                         }
                                     }
                                     setOfferFromServer(off);
@@ -231,13 +230,13 @@ public class RequestActivity extends Activity {
                                         adapter.clear();
                                         for (int i = 0; i < getOfferFromServer().size(); i++) {
                                             for (int j = 0; j < getOfferFromServer().get(i).getList().size(); j++) {
-                                                Log.i("List offers",getOfferFromServer().get(i).getList().get(j).getBrand()+"|"+getOfferFromServer().get(i).getList().get(j).getName());
+                                                //Log.i("List offers",getOfferFromServer().get(i).getList().get(j).getBrand()+"|"+getOfferFromServer().get(i).getList().get(j).getName());
                                                 adapter.insert(getOfferFromServer().get(i).getList().get(j), 0);
                                                 listToRequest.add(getOfferFromServer().get(i).getList().get(j));
                                             }
 
                                         }
-                                        AddNewItemActivity.setListRequest(listToRequest);
+                                       // AddNewItemActivity.setListRequest(listToRequest);
                                     }
                                 }
                                 else {
@@ -255,7 +254,7 @@ public class RequestActivity extends Activity {
                                             Log.i("List received not approuved yet", "" + li.get(i).getName());
                                             adapter.insert(li.get(i), 0);
                                         }
-                                        AddNewItemActivity.setListRequest(li);
+                                        //AddNewItemActivity.setListRequest(li);
                                     }
                                 } else {
                                     createDialog("Warning", "There is no offer, sorry dude");
@@ -300,7 +299,7 @@ public class RequestActivity extends Activity {
         HttpPost request = new HttpPost(URL);
         HttpResponse response;
         List<Product> list=new ArrayList<Product>();
-        list=AddNewItemActivity.getShoppingList();
+        //list=AddNewItemActivity.getShoppingList();
         
         if(list.size()==0)
         {
@@ -310,7 +309,7 @@ public class RequestActivity extends Activity {
         {
         	for(int i=0;i<list.size();i++)
         	{
-        		if(list.get(i).getAccept()==true)
+        		//if(list.get(i).getAccept()==true)
 	        	{
 	        		cpt++;
 	        	}

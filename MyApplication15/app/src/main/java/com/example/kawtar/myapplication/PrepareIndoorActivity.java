@@ -99,7 +99,7 @@ public class PrepareIndoorActivity extends Activity {
     {
         if(indoorMap==null)
         {
-            Log.i("Map nulle", "merde");
+            Log.i("Prepare map", "Map nulle");
         }
         return indoorMap;
     }

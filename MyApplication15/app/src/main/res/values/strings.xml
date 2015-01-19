@@ -41,7 +41,7 @@
     <string name="popup_button_clear_store_list">delete market list</string>
     <string name="label_add_new_product_quantity">Quantity:</string>
     <string name="label_add_new_product_unit">Units:</string>
-    <string name="label_add_new_product_name">Name::</string>
+    <string name="label_add_new_product_name">Name:</string>
     <string name="label_add_new_product_store">Market:</string>
     <string name="label_add_new_store_name">Name:</string>
     <string name="label_add_new_unit_name">Name:</string>

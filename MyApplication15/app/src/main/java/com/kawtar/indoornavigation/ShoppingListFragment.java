@@ -100,6 +100,38 @@ public class ShoppingListFragment extends Fragment {
                 }
                 //List to sort out
                 Log.i("elements dans la liste",list.get(0).getName());
+                //Sort out list
+                nodes = new ArrayList<ProductToSend>();
+                links = new ArrayList<Link>();
+                for (int i = 0; i < list.size(); i++) {
+                    Log.i("Id",""+list.get(i).getName());
+                    Log.i("Name",""+list.get(i).getName());
+                    Log.i("Posx",""+list.get(i).getPositionx());
+                    Log.i("Posy",""+list.get(i).getPositiony());
+                    ProductToSend location = new ProductToSend(list.get(i).getName(), list.get(i).getName(),list.get(i).getQuantity(),list.get(i).getUnit(),list.get(i).getPrice(),list.get(i).getPositionx(),list.get(i).getPositiony(),false);
+                    //Node location = new Node("Node_" + i, "Node_" + i,i+5,i+7);
+                    nodes.add(location);
+                }
+                for (int j=0; j<list.size(); j++){
+                    for(int k=0; k<list.size();k++){
+                        if(k!=j){
+                            addLane("Edge"+(j+k),j,k);
+                        }
+
+                    }
+                }
+                // Lets check from location Loc_1 to Loc_10
+                Graph graph = new Graph(nodes, links);
+                Dijkstra dijkstra = new Dijkstra(graph);
+                dijkstra.execute(nodes.get(0));
+                LinkedList<ProductToSend> path = dijkstra.getPath(nodes.get(list.size()));
+
+                List listSorted=new ArrayList<ProductToSend>();
+                for (ProductToSend vertex : path) {
+                    System.out.println(vertex);
+                    listSorted.add(vertex);
+
+                }
 
                 //create an ArrayAdaptar from the String Array
                 ArrayAdapter<ProductToSend> dataAdapter = new ArrayAdapter<ProductToSend>(getActivity(),
@@ -125,6 +157,7 @@ public class ShoppingListFragment extends Fragment {
 
 
     }
+
     public  void createDialog(final String title, String text) {
         AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
         // Button to create an alert dialog for setting the connection to the server

@@ -48,7 +48,8 @@ public class DetailsFinalListActivity extends Activity{
                     {
                         String superMarket = offer.get(i).getSuperMarket().getName();
                         Toast.makeText(getApplicationContext(), "Name in details:" + superMarket, Toast.LENGTH_LONG).show();
-                        list = offer.get(i).getList();
+
+                        list = offer.get(i).getSuperMarket().getList();
                         break;
 
                     }

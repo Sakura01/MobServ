@@ -1,21 +1,38 @@
 package com.kawtar.jsoncontrol;
 
 
+import com.kawtar.listshopping.ProductToSend;
+import com.shopping.list.bean.Product;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SuperMarket {  
     private String mName;     
     private double mPositionX;
     private double mPositionY;
     private String mIndoorMapUrl;
-    public SuperMarket(String name,double positionX, double positionY,String mapUrl)
+    private List<ProductToSend> list;
+    public SuperMarket(List<ProductToSend>list,String name,double positionX, double positionY,String mapUrl)
     {         
-    	mName = name; 
+    	mName = name;
+        this.list=new ArrayList<ProductToSend>();
+        this.list=list;
     	mIndoorMapUrl=mapUrl;
     	mPositionX=positionX;
         mPositionY=positionY;
-    }  
+    }
+    public void setList(List<ProductToSend>liste)
+    {
+        list=liste;
+    }
+    public List<ProductToSend> getList()
+    {
+        return list;
+    }
     public String getIndoorMapUrl()
     {
     	return mIndoorMapUrl;
@@ -64,7 +81,10 @@ public class SuperMarket {
 
     }
     public SuperMarket parseJSON(String result){
-    	SuperMarket superMarket = new SuperMarket("",0.0,0.0,"");
+        List<ProductToSend> liste=new ArrayList<ProductToSend>();
+        ProductToSend p=new ProductToSend("","",0,"",0,0,0,false);
+        liste.add(p);
+    	SuperMarket superMarket = new SuperMarket(liste,"",0.0,0.0,"");
         try {
         	JSONObject jsonObject= new JSONObject(result);
         	JSONObject superMarketRowName=jsonObject.getJSONObject("name");

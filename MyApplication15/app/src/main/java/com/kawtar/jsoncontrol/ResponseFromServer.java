@@ -1,5 +1,7 @@
 package com.kawtar.jsoncontrol;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,25 +9,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.kawtar.listshopping.ProductToSend;
+import com.shopping.list.bean.Product;
 
 public class ResponseFromServer 
 {
 	private SuperMarket mSuperMarket;
 	private float mTotal;
-	private static List<ProductToSend> listSh;
 	private float mDistance;
-    private static String toParse;
     private static List<ResponseFromServer> offers;
     private static ResponseFromServer responseOffers;
     private static SuperMarket superMarket;
     private static List<ProductToSend>lip;
-	public ResponseFromServer(List<ProductToSend> list,SuperMarket supermarket,float total,float distance )
-	{         
-			listSh=new ArrayList<ProductToSend>();
-			listSh=list;
+	public ResponseFromServer(SuperMarket supermarket,float total,float distance )
+	{
 	    	mTotal=total;
 	    	mDistance=distance;
-	    	mSuperMarket=new SuperMarket("",0.0,0.0,"");
+            List<ProductToSend>list=new ArrayList<ProductToSend>();
+	    	mSuperMarket=new SuperMarket(list,"",0.0,0.0,"");
 	    	mSuperMarket=supermarket;
     }
 
@@ -45,14 +45,6 @@ public class ResponseFromServer
 	{
 		return mTotal;
 	}
-	public  List<ProductToSend> getList()
-	{
-    	return listSh;
-	}
-	public void setList(List<ProductToSend> list)
-	{
-		listSh=list;
-	}
 	public static List<ResponseFromServer> parseJSONResult(String result)
 	{
 
@@ -60,28 +52,42 @@ public class ResponseFromServer
 	    {
           offers=new ArrayList<ResponseFromServer>();
 		  JSONArray jarray=new JSONArray(result);
-	      for(int i=0;i<jarray.length();i++)
-	     {
-	    	     JSONArray jb= jarray.getJSONArray(i);
+           Log.i("Resultat parsage",result);
+            for(int i=0;i<jarray.length();i++)
+            {
+                JSONObject json=jarray.getJSONObject(i);
+                String totalPrice =  json.getString("total_price");
 
-	             for(int k=0;k<jb.length();k++)
-	             {
+                String supermarketName =   json.getString("name");
+                String supermarketMapUrl=  json.getString("supermarket_localMap");
+                String supermarketDistance=  json.getString("distance");
+                String supermarketPositionX =   json.getString("supermarket_positionX");
+                String supermarketPositionY =   json.getString("supermarket_positionY");
 
-	            	 JSONObject jbo=jb.getJSONObject(k);
-		             String totalPrice =  jbo.getString("total_price");
+                JSONArray listShopping = json.getJSONArray("list");
+                Log.i("list"," " + i +" "+ listShopping.toString());
+                lip=new ArrayList<ProductToSend>();
+                lip=getParsing(listShopping);
+                for(int l=0;l<lip.size();l++)
+                {
+                    Log.i("Log of lip",""+l+lip.get(l).getName()+lip.get(l).getPrice());
+                }
+                superMarket=new SuperMarket(lip,supermarketName,Double.parseDouble(supermarketPositionX),Double.parseDouble(supermarketPositionY),supermarketMapUrl);
+                responseOffers=new ResponseFromServer(superMarket,round(Float.parseFloat(totalPrice), 2),round(Float.parseFloat(supermarketDistance), 2));
+                /*for(int k=0;k<responseOffers.getList().size();k++)
+                {
+                    Log.i("list in the response offer","index"+k+responseOffers.getList().get(k).getName()+responseOffers.getList().get(k).getPrice());
+                }*/
+                offers.add(responseOffers);
+                /*for(int k=0;k<offers.size();k++)
+                {
+                    List<ProductToSend>listt=new ArrayList<ProductToSend>();
+                    listt=offers.get(k).getList();
+                    for(int m=0;m<listt.size();m++)
+                    Log.i("list in the response offer after offers","index"+k+listt.get(m).getName()+listt.get(m).getPrice());
+                }*/
 
-                     String supermarketName =  jbo.getString("name");
-                     String supermarketMapUrl= jbo.getString("supermarket_localMap");
-                     String supermarketDistance= jbo.getString("distance");
-                     String supermarketPositionX =  jbo.getString("supermarket_positionX");
-                     String supermarketPositionY =  jbo.getString("supermarket_positionY");
-                     superMarket=new SuperMarket(supermarketName,Double.parseDouble(supermarketPositionX),Double.parseDouble(supermarketPositionY),supermarketMapUrl);
-                     JSONArray listShopping = jbo.getJSONArray("list");
-                     lip=getParsing(listShopping);
-                     responseOffers=new ResponseFromServer(lip,superMarket,round(Float.parseFloat(totalPrice), 2),round(Float.parseFloat(supermarketDistance), 2));
-                     offers.add(responseOffers);
-                 }
-         }
+            }
 
 	   }
        catch(Exception e)

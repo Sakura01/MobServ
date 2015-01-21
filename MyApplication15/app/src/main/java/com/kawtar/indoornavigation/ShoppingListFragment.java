@@ -84,6 +84,7 @@ public class ShoppingListFragment extends Fragment {
 
     private void displayListView() {
         String supermarketName=OutdoorMapActivity.superMarketMap;
+        Log.i("Carte fragment list",supermarketName);
         String result= ShoppinglistActivity.getResultServer();
         List<ResponseFromServer> offer= ResponseFromServer.parseJSONResult(result);
             List<ProductToSend> list=new ArrayList<ProductToSend>();
@@ -93,46 +94,11 @@ public class ShoppingListFragment extends Fragment {
                 {
                     if(offer.get(i).getSuperMarket().getIndoorMapUrl().equals(supermarketName))
                     {
-                        list=offer.get(i).getList();
+                        list=offer.get(i).getSuperMarket().getList();
 
                         break;
                     }
                 }
-                //List to sort out
-                Log.i("elements dans la liste",list.get(0).getName());
-                //Sort out list
-                nodes = new ArrayList<ProductToSend>();
-                links = new ArrayList<Link>();
-                for (int i = 0; i < list.size(); i++) {
-                    Log.i("Id",""+list.get(i).getName());
-                    Log.i("Name",""+list.get(i).getName());
-                    Log.i("Posx",""+list.get(i).getPositionx());
-                    Log.i("Posy",""+list.get(i).getPositiony());
-                    ProductToSend location = new ProductToSend(list.get(i).getName(), list.get(i).getName(),list.get(i).getQuantity(),list.get(i).getUnit(),list.get(i).getPrice(),list.get(i).getPositionx(),list.get(i).getPositiony(),false);
-                    //Node location = new Node("Node_" + i, "Node_" + i,i+5,i+7);
-                    nodes.add(location);
-                }
-                for (int j=0; j<list.size(); j++){
-                    for(int k=0; k<list.size();k++){
-                        if(k!=j){
-                            addLane("Edge"+(j+k),j,k);
-                        }
-
-                    }
-                }
-                // Lets check from location Loc_1 to Loc_10
-                Graph graph = new Graph(nodes, links);
-                Dijkstra dijkstra = new Dijkstra(graph);
-                dijkstra.execute(nodes.get(0));
-                LinkedList<ProductToSend> path = dijkstra.getPath(nodes.get(list.size()));
-
-                List listSorted=new ArrayList<ProductToSend>();
-                for (ProductToSend vertex : path) {
-                    System.out.println(vertex);
-                    listSorted.add(vertex);
-
-                }
-
                 //create an ArrayAdaptar from the String Array
                 ArrayAdapter<ProductToSend> dataAdapter = new ArrayAdapter<ProductToSend>(getActivity(),
                         R.layout.shopping_list_fragment, list);//list

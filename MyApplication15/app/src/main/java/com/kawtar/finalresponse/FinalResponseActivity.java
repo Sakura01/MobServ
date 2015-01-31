@@ -38,7 +38,7 @@ public class FinalResponseActivity extends Activity {
         if (result != null)
         {
             List<ResponseFromServer> offer =ResponseFromServer.parseJSONResult(result);
-            Toast.makeText(getApplicationContext(), "Final" + result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Final" + result, Toast.LENGTH_LONG).show();
             if (offer.size() != 0) {
                 for (int i = 0; i < offer.size(); i++) {
                     adapter.insert(offer.get(i), 0);

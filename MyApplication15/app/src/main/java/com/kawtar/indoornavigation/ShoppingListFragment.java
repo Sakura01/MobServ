@@ -22,14 +22,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.example.kawtar.myapplication.OutdoorMapActivity;
 import com.example.kawtar.myapplication.R;
 import com.kawtar.jsoncontrol.ResponseFromServer;
-import com.kawtar.listshopping.Dijkstra;
-import com.kawtar.listshopping.Graph;
-import com.kawtar.listshopping.Link;
 import com.kawtar.listshopping.ProductToSend;
 import com.shopping.list.ShoppinglistActivity;
-import com.shopping.list.bean.Product;
-
-import java.util.LinkedList;
 
 public class ShoppingListFragment extends Fragment {
     private List<ProductToSend> nodes;

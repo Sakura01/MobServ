@@ -27,8 +27,7 @@
 
         <activity
             android:name="com.kawtar.mainUI.SplashActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"  >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,8 +36,7 @@
         </activity>
         <activity
             android:name=".ProximityActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"  >
+            android:label="@string/app_name"  >
             <intent-filter >
                 <action android:name="com.example.kawtar.myapplication.activity.proximity"/>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -47,20 +45,19 @@
 
         <activity
             android:name=".NotificationView"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"  >
+            android:label="@string/app_name"  >
 
             <intent-filter >
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
         </activity>
-        <activity android:label="@string/title_indoor_map_activity" android:name="com.kawtar.indoornavigation.IndoorMapActivity" android:screenOrientation="landscape" > </activity>
-        <activity android:label="@string/title_activity_main" android:name="com.kawtar.mainUI.MainActivity" android:screenOrientation="landscape"  > </activity>
-        <activity android:label="@string/title_activity_finalresponse" android:name="com.kawtar.finalresponse.FinalResponseActivity" android:screenOrientation="landscape"  > </activity>
-        <activity android:label="@string/title_activity_maps" android:name=".OutdoorMapActivity" android:screenOrientation="landscape"  > </activity>
-        <activity android:label="@string/title_activity_prepare_indoor_map" android:name=".PrepareIndoorActivity" android:screenOrientation="landscape"  > </activity>
-        <activity android:label="@string/title_activity_details_list" android:name="com.kawtar.finalresponse.DetailsFinalListActivity" android:screenOrientation="landscape" > </activity>
+        <activity android:label="@string/title_indoor_map_activity" android:name="com.kawtar.indoornavigation.IndoorMapActivity"  > </activity>
+        <activity android:label="@string/title_activity_main" android:name="com.kawtar.mainUI.MainActivity"   > </activity>
+        <activity android:label="@string/title_activity_finalresponse" android:name="com.kawtar.finalresponse.FinalResponseActivity"  > </activity>
+        <activity android:label="@string/title_activity_maps" android:name=".OutdoorMapActivity"   > </activity>
+        <activity android:label="@string/title_activity_prepare_indoor_map" android:name=".PrepareIndoorActivity"   > </activity>
+        <activity android:label="@string/title_activity_details_list" android:name="com.kawtar.finalresponse.DetailsFinalListActivity"  > </activity>
 
         <!-- WIDGET PART -->
         <receiver android:name="com.shopping.list.widget.ShoppinglistWidgetProvider" >

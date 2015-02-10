@@ -69,7 +69,7 @@ public class OutdoorMapActivity extends FragmentActivity implements LocationList
         Log.i("MAP",supermarketName);
         if (result != null) {
             List<ResponseFromServer> offer = ResponseFromServer.parseJSONResult(result);
-            Toast.makeText(getApplicationContext(), "Details"+result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Details"+result, Toast.LENGTH_LONG).show();
             if (offer.size() != 0) {
                 for (int i = 0; i < offer.size(); i++) {
                     if (offer.get(i).getSuperMarket().getName().equals(supermarketName))

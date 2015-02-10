@@ -760,11 +760,19 @@ public class ShoppinglistActivity extends AbstractShoppinglistActivity {
                 //Log.i("Name",splited[2]);
                 //Log.i("Unit",splited[1]);
                 //Log.i("Quanti",splited[0]);
-                ProductToSend productSend=new ProductToSend(splited[2],splited[2],Integer.parseInt(splited[0]),splited[1],0,0,0,false);
-                listToSubmit.add(productSend);
-            }
-            //ProductToSend productSend=new ProductToSend("milk",1,0,0,0,false);
+                String name="";
+                Log.i("length",""+splited.length);
+                for(int j=2;j<splited.length;j++)
+                {
+                    name+=splited[j]+"\t";
+                    Log.i("Name with spaces",name);
+                }
 
+                ProductToSend productSend=new ProductToSend(0,name.trim(),Integer.parseInt(splited[0]),splited[1],0,0,0,false);
+                Log.i("Name of prod",productSend.getName());
+                listToSubmit.add(productSend);
+                Log.i("Name of prod in list",listToSubmit.get(i).getName());
+            }
             reqlist=new RequestList(listToSubmit, MainActivity.getDistanceRange(), MainActivity.getBudget(),MainActivity.getUserLatitude(),MainActivity.getUserLongitude());
             Log.i("DistR", ""+MainActivity.getDistanceRange());
             Log.i("Budg", ""+MainActivity.getBudget());

@@ -58,7 +58,10 @@ public class DetailsFinalListActivity extends Activity{
                     ProductToSend product = list.get(j);
                     Log.i("elme in Details",product.getName());
                     adapter.insert(product, 0);
+
                 }
+                Log.i("Name in adapter",adapter.getItem(0).getName());
+                Log.i("Name in adapter",adapter.getItem(1).getName());
             } else {
                 createDialog("Error offer", "A problem has occured, sorry");
             }

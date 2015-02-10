@@ -82,7 +82,7 @@ public class SuperMarket {
     }
     public SuperMarket parseJSON(String result){
         List<ProductToSend> liste=new ArrayList<ProductToSend>();
-        ProductToSend p=new ProductToSend("","",0,"",0,0,0,false);
+        ProductToSend p=new ProductToSend(0,"",0,"",0,0,0,false);
         liste.add(p);
     	SuperMarket superMarket = new SuperMarket(liste,"",0.0,0.0,"");
         try {

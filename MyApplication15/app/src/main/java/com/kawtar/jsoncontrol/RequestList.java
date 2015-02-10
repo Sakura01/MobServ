@@ -1,5 +1,7 @@
 package com.kawtar.jsoncontrol;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +66,8 @@ public class RequestList {
               {
         		  JSONObject jsonObject= new JSONObject();
         		  jsonObject=getList().get(i).toJSON();
-        		  jsonArray.put(jsonObject);
+                  Log.i("json",jsonObject.toString());
+                  jsonArray.put(jsonObject);
               }
         	  jsonResponse.put("list",jsonArray);
             return jsonResponse.toString();

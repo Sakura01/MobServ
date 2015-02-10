@@ -27,7 +27,6 @@ import com.shopping.list.ShoppinglistActivity;
 
 public class ShoppingListFragment extends Fragment {
     private List<ProductToSend> nodes;
-    private List<Link> links;
     private  OnShoppingItemSelectedListener mListener;
     private final String TAG_SHOPPING_LIST_FRAGMENT="ShoppingListFragment";
     @Override
@@ -134,8 +133,5 @@ public class ShoppingListFragment extends Fragment {
         AlertDialog alert1 = ad.create();
         alert1.show();
     }
-    private void addLane(String laneId, int sourceLocNo, int destLocNo) {
-        Link lane = new Link(laneId,nodes.get(sourceLocNo), nodes.get(destLocNo));
-        links.add(lane);
-    }
+
 }

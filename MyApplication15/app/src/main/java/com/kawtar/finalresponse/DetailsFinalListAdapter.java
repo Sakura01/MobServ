@@ -49,7 +49,7 @@ public class DetailsFinalListAdapter extends ArrayAdapter<ProductToSend> {
 	}
 
 	private void setupItem(toShopItemHolder holder) {
-		holder.name.setText(holder.offerItem.getName());
+		holder.name.setText(holder.offerItem.getName().substring(0,1).toUpperCase() +holder.offerItem.getName().substring(1));
 		holder.quantity.setText(String.valueOf(holder.offerItem.getQuantity()));
         holder.unit.setText(holder.offerItem.getUnit());
 		holder.price.setText(String.valueOf(ResponseFromServer.round(holder.offerItem.getPrice(), 2) ));

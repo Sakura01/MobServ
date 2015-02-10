@@ -7,5 +7,6 @@
     android:textColor="@color/brown"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textStyle="italic"
+    android:inputType="textCapSentences"
     android:typeface="sans">
 </TextView>

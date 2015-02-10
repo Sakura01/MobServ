@@ -8,7 +8,7 @@ public class TabuSearch {
 
     public static int[] getBestNeighbour(TabuList tabuList,
                                          TSPEnvironment tspEnviromnet,
-                                         int[] initSolution) {
+                                         int[] initSolution,int dim) {
 
 
         int[] bestSol = new int[initSolution.length]; //this is the best Solution So Far
@@ -47,7 +47,7 @@ public class TabuSearch {
 
         if (city1 != 0) {
             tabuList.decrementTabu();
-            tabuList.tabuMove(city1, city2);
+            tabuList.tabuMove(city1, city2,dim);
         }
         return bestSol;
 

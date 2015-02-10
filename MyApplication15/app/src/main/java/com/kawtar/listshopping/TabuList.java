@@ -10,9 +10,9 @@ public class TabuList {
         tabuList = new int[numCities][numCities]; //city 0 is not used here, but left for simplicity
     }
 
-    public void tabuMove(int city1, int city2){ //tabus the swap operation
-        tabuList[city1][city2]+= 5;
-        tabuList[city2][city1]+= 5;
+    public void tabuMove(int city1, int city2,int dim){ //tabus the swap operation
+        tabuList[city1][city2]+=dim;
+        tabuList[city2][city1]+= dim;
 
     }
 

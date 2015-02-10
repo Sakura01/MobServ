@@ -81,68 +81,69 @@ public class ShoppingListFragment extends Fragment {
     public void tsp() {
 
         TSPEnvironment tspEnvironment = new TSPEnvironment();
-        tspEnvironment.distances = //Distance matrix, 5x5, used to represent distances
-                new int[][]{{0, 1, 3, 4, 5},
-                        {1, 0, 1, 4, 8},
-                        {3, 1, 0, 5, 1},
-                        {4, 4, 5, 0, 2},
-                        {5, 8, 1, 2, 0}};
         //Between cities. 0,1 represents distance between cities 0 and 1, and so on.
         //initial solution
         //city numbers start from 0
         // the first and last cities' positions do not change
         int dim=getList().size();
         List<ProductToSend>lit=getList();
-        int[] currSolution = new int[dim];
-        for(int j=0;j<lit.size();j++)
-        {
-            ProductToSend p=lit.get(j);
-            p.setId(j);
-            Log.i("ele id",""+p.getId());
-            currSolution[j] = p.getId();
-            Log.i("Init mat",""+currSolution);
-        }
-        //Compute weights
-        int[][] mat = new int[dim][dim];
-        Log.i("Dim",""+dim);
-        for(int k=0;k<dim;k++)
-        {
-            for(int l=0;l<dim;l++)
+        if(lit.size()!=0){
+            int[] currSolution = new int[dim];
+            for(int j=0;j<lit.size();j++)
             {
-              double weight=Math.sqrt(Math.pow(getList().get(l).getPositionx()-getList().get(k).getPositionx(),2)+Math.pow(getList().get(l).getPositiony()-getList().get(k).getPositiony(),2));
-              Log.i("weight",""+weight);
-              int conv=(int) weight;
-              mat[k][l]=conv;
-              Log.i("Matrix values",""+mat[k][l]);
+                ProductToSend p=lit.get(j);
+                Log.i("MIMI",p.getName());
+                p.setId(j);
+                Log.i("ele id",""+p.getId());
+                currSolution[j] = p.getId();
+                Log.i("Init mat",""+currSolution[j]);
             }
-        }
-        tspEnvironment.distances=mat;
-
-        int numberOfIterations = 100;
-        int tabuLength = 10;
-        TabuList tabuList = new TabuList(tabuLength);
-
-        int[] bestSol = new int[currSolution.length]; //this is the best Solution So Far
-        System.arraycopy(currSolution, 0, bestSol, 0, bestSol.length);
-        int bestCost = tspEnvironment.getObjectiveFunctionValue(bestSol);
-
-        for (int i = 0; i < numberOfIterations; i++) { // perform iterations here
-
-            currSolution = TabuSearch.getBestNeighbour(tabuList, tspEnvironment, currSolution);
-            //printSolution(currSolution);
-            int currCost = tspEnvironment.getObjectiveFunctionValue(currSolution);
-
-            //System.out.println("Current best cost = " + tspEnvironment.getObjectiveFunctionValue(currSolution));
-
-            if (currCost < bestCost) {
-                System.arraycopy(currSolution, 0, bestSol, 0, bestSol.length);
-                bestCost = currCost;
+            //Compute weights
+            int[][] mat = new int[dim][dim];
+            Log.i("Dim",""+dim);
+            for(int k=0;k<dim;k++)
+            {
+                for(int l=0;l<dim;l++)
+                {
+                    double weight=Math.sqrt(Math.pow(getList().get(l).getPositionx()-getList().get(k).getPositionx(),2)+Math.pow(getList().get(l).getPositiony()-getList().get(k).getPositiony(),2));
+                    Log.i("weight",""+weight);
+                    int conv=(int) weight;
+                    mat[k][l]=conv;
+                    Log.i("Matrix values",""+mat[k][l]);
+                }
             }
+            tspEnvironment.distances=mat;
+
+            int numberOfIterations = 100;
+            int tabuLength = 2*dim;
+            TabuList tabuList = new TabuList(tabuLength);
+
+            int[] bestSol = new int[currSolution.length]; //this is the best Solution So Far
+            System.arraycopy(currSolution, 0, bestSol, 0, bestSol.length);
+            int bestCost = tspEnvironment.getObjectiveFunctionValue(bestSol);
+
+            for (int i = 0; i < numberOfIterations; i++) { // perform iterations here
+
+                currSolution = TabuSearch.getBestNeighbour(tabuList, tspEnvironment, currSolution,dim);
+                //printSolution(currSolution);
+                int currCost = tspEnvironment.getObjectiveFunctionValue(currSolution);
+
+                //System.out.println("Current best cost = " + tspEnvironment.getObjectiveFunctionValue(currSolution));
+
+                if (currCost < bestCost) {
+                    System.arraycopy(currSolution, 0, bestSol, 0, bestSol.length);
+                    bestCost = currCost;
+                }
+            }
+
+            System.out.println("Search done! \nBest Solution cost found = " + bestCost + "\nBest Solution :");
+
+            printSolution(bestSol);
         }
-
-        System.out.println("Search done! \nBest Solution cost found = " + bestCost + "\nBest Solution :");
-
-        printSolution(bestSol);
+        else
+        {
+            createDialog("Error offer", "A problem has occured, sorry");
+        }
 
 
 
@@ -157,7 +158,6 @@ public class ShoppingListFragment extends Fragment {
             for (int i = 0; i < offer.size(); i++) {
                 if (offer.get(i).getSuperMarket().getIndoorMapUrl().equals(supermarketName)) {
                     lit = offer.get(i).getSuperMarket().getList();
-
                     break;
                 }
             }
@@ -165,16 +165,23 @@ public class ShoppingListFragment extends Fragment {
         return lit;
     }
     public static void printSolution(int[] solution) {
-        String path="";
-        //List<ProductToSend> tmp=new ArrayList<ProductToSend>();
-        //for (int i = 0; i < solution.length; i++)
-        //{
-            //ProductToSend produ=getList().get(i);
-            //if(produ.getId()==solution[i]) {
-             //   tmp.add(produ);
-           // }
-         //   Log.i("TMP list",tmp.get(i).getName());
-       // }
+        List<ProductToSend> tmp=new ArrayList<ProductToSend>();
+        Log.i("size_sol",""+solution.length);
+        List<ProductToSend>li=new ArrayList<ProductToSend>();
+        li=getList();
+        Log.i("size_list",""+li.size());
+        for(int j=0;j<li.size();j++) {
+            ProductToSend produ=li.get(j);
+            Log.i("mp",""+produ);
+            for (int i = 0; i < solution.length; i++) {
+                if(li.get(j).getId()==solution[i]) {
+                    tmp.add(produ);
+                    Log.i("Final tmp",tmp.get(i).getName());
+                }
+                break;
+            }
+        }
+
     }
     private void displayListView() {
         String supermarketName=OutdoorMapActivity.superMarketMap;
@@ -194,6 +201,11 @@ public class ShoppingListFragment extends Fragment {
                 }
                 //create an ArrayAdaptar from the String Array
                 tsp();
+                for(int i=0;i<list.size();i++)
+                {
+                    list.get(i).setName(list.get(i).getName().substring(0,1).toUpperCase() +list.get(i).getName().substring(1));
+                }
+
                 ArrayAdapter<ProductToSend> dataAdapter = new ArrayAdapter<ProductToSend>(getActivity(),
                         R.layout.shopping_list_fragment, list);//list
                 final ListView listView = (ListView) getView().findViewById(R.id.listofShoppingItems);
